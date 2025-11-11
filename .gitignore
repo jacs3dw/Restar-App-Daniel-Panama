@@ -1,12 +1,13 @@
-node_modules/
-.DS_Store
-dist/
-www/
-*.log
+# Angular cache
+.angular/cache
+.angular
+
+# Node
+node_modules
+
+# Build
+dist
+build
+
+# Environment
 .env
-# Archivos y carpetas a ignorar
-node_modules/
-.angular/cache/
-dist/
-www/
-.DS_Store
