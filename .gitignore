@@ -4,3 +4,9 @@ dist/
 www/
 *.log
 .env
+# Archivos y carpetas a ignorar
+node_modules/
+.angular/cache/
+dist/
+www/
+.DS_Store
