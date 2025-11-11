@@ -1,0 +1,8 @@
+{
+  "name": "FastCourier",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

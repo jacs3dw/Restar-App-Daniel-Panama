@@ -1,0 +1,16 @@
+ion-icon[name="eye"], ion-icon[name="eye-off"] {
+    font-size: 20px;
+    color: var(--ion-color-dis);
+    --highlight-color-focused:none
+  }
+  ion-input[type=password]::-ms-reveal { display: none; }
+
+  .icon1 {
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 20px;
+    background-color: #F6F6F6;
+  }

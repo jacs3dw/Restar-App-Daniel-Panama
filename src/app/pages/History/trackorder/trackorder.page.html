@@ -1,0 +1,77 @@
+
+
+<ion-content [fullscreen]="true" [class]="darkMode?'bgd':'bg'">
+
+  <div class="list1" style="margin: 10px 15px;margin-top: 20px;">
+    <ion-icon routerLink="/services" name="arrow-back" style="font-size: 24px;color: var(--ion-color-txt);" />
+    <ion-text class="r14">Track Order</ion-text>
+    <div></div>
+  </div>
+
+  <div class="list" style="margin: 10px 15px;">
+    <div class="input2" style="flex: 1;background-color: var(--ion-color-search);">
+      <ion-icon name="search" />
+      <ion-input placeholder="97847548956" style="margin-left: 10px;flex: 1;" />
+    </div>
+    <div class="icon" style="margin-left: 10px;">
+      <ion-icon name="scan" style="font-size: 24px;color: var(--ion-color-bg);" />
+    </div>
+  </div>
+
+  <div style="position: fixed;bottom: 0;padding: 15px;width: 100%;border-top-left-radius: 20px;border-top-right-radius: 20px;background-color: var(--ion-color-bg1);">
+    
+    <ion-text class="r14" style="color: var(--ion-color-dis);">Shipping ID</ion-text>
+    <div style="margin-top: 5px;">
+      <ion-text class="b16" >97847548956</ion-text>
+    </div>
+
+    <div class="list" style="margin-top: 20px;">
+      <div>
+        <ion-text class="b14" >May 21</ion-text>
+        <div style="margin-bottom: 15px;">
+          <ion-text class="r12" style="color: var(--ion-color-dis);" >12:50</ion-text>
+        </div>
+        <ion-text class="b14" >May 20</ion-text>
+        <div style="margin-bottom: 15px;">
+          <ion-text class="r12" style="color: var(--ion-color-dis);" >14:00</ion-text>
+        </div>
+        <ion-text class="b14" >May 19</ion-text>
+        <div>
+          <ion-text class="r12" style="color: var(--ion-color-dis);" >13:00</ion-text>
+        </div>
+      </div>
+      <div style="margin: 0 15px;">
+        <div class="icon" style="height: 12px;width: 12px;background-color: var(--ion-color-primary);">
+          <div class="icon" style="height: 4px;width: 4px;background-color: var(--ion-color-bg);"></div>
+        </div>
+        <div style="border: 1px solid var(--ion-color-primary);height: 50px;width: 1px;margin-left: 5px;"></div>
+        <div class="icon" style="height: 12px;width: 12px;background-color: var(--ion-color-primary);">
+          <div class="icon" style="height: 4px;width: 4px;background-color: var(--ion-color-bg);"></div>
+        </div>
+        <div style="border: 1px solid var(--ion-color-search);height: 50px;width: 1px;margin-left: 5px;"></div>
+        <div class="icon" style="height: 12px;width: 12px;background-color:#F95A5420;">
+          <div class="icon" style="height: 4px;width: 4px;background-color: var(--ion-color-primary);"></div>
+        </div>
+      </div>
+      <div style="flex: 1;">
+        <ion-text class="b16">Package has been received</ion-text>
+        <div style="margin-bottom: 15px;">
+          <ion-text class="r12" style="color: var(--ion-color-dis);">W Market Rd, Gouripur 3517</ion-text>
+        </div>
+        <ion-text class="b16">Arrived at destination area</ion-text>
+        <div style="margin-bottom: 15px;">
+          <ion-text class="r12" style="color: var(--ion-color-dis);">W Market Rd, Gouripur 3517</ion-text>
+        </div>
+        <ion-text class="b16">Accept by Wedx</ion-text>
+        <div >
+          <ion-text class="r12" style="color: var(--ion-color-dis);">W Market Rd, Gouripur 3517</ion-text>
+        </div>
+      </div>
+    </div>
+
+    <ion-button routerLink="/services" expand="block" style="margin: 20px 0;margin-top: 40px;--background: var(--ion-color-txt);--color: var(--ion-color-bg);">Package Details</ion-button>
+
+
+  </div>
+
+</ion-content>

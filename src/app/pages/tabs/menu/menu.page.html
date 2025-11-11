@@ -1,0 +1,99 @@
+<ion-header [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-primary);">
+  <ion-toolbar color="primary" style="padding: 0px 15px;padding-top: 25px;--border-width: 0 0;">
+    
+    <div class="list">
+      <ion-img src="../../../../assets/image/d5.png" style="height: 56px;width: 56px;"></ion-img>
+      <div style="flex:1;margin-left: 12px;">
+        <ion-text class="r14" style="color: #fff;">ferdous&commat;gmail.com</ion-text>
+        <div style="margin-top: 2px;">
+          <ion-text class="subtitle" style="color: #fff;">Ferdous Sarker</ion-text>
+        </div>
+      </div>
+      <ion-img routerLink="/profile" src="../../../../assets/image/a9.png" style="height: 32px;width: 32px;"></ion-img>
+    </div>
+
+  </ion-toolbar>
+  <div class="box2 list" style="margin: 20px 20px;background-color: #E14842;justify-content: space-evenly;">
+    <div class="column" style="align-items: center;">
+      <ion-text class="b16" style="color: #fff;">03</ion-text>
+      <ion-text class="r14" style="color: #F2F2F2;">Sent</ion-text>
+    </div>
+
+    <div style="height: 25px;width: 1px;background-color: #FFFFFF25;"></div>
+
+    <div class="column" style="align-items: center;">
+      <ion-text class="b16" style="color: #fff;">09</ion-text>
+      <ion-text class="r14" style="color: #F2F2F2;">Received</ion-text>
+    </div>
+  </div>
+  <div style="background-color: var(--ion-color-bg);padding: 10px;border-top-left-radius: 20px;border-top-right-radius: 20px;flex: 1;flex-direction: column;margin-top: 10px;margin-bottom: -2px;">
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" color="bg">
+
+  <div class="list" routerLink="/notify">
+    <ion-img src="../../../../assets/image/a10.png" style="height: 24px;width: 24px;"></ion-img>
+    <ion-text class="m16" style="flex:1;margin-left: 15px;">Notification</ion-text>
+    <ion-icon name="chevron-forward" style="font-size: 16px;" color="dis"></ion-icon>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);"></div>
+
+  <div class="list">
+    <ion-img src="../../../../assets/image/a11.png" style="height: 24px;width: 24px;"></ion-img>
+    <ion-text class="m16" style="flex:1;margin-left: 15px;">Payment</ion-text>
+    <ion-icon name="chevron-forward" style="font-size: 16px;" color="dis"></ion-icon>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);"></div>
+
+  <div class="list">
+    <ion-img src="../../../../assets/image/a12.png" style="height: 24px;width: 24px;"></ion-img>
+    <ion-text class="m16" style="flex:1;margin-left: 15px;">Setting</ion-text>
+    <ion-icon name="chevron-forward" style="font-size: 16px;" color="dis"></ion-icon>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);"></div>
+
+  <div class="list">
+    <ion-img src="../../../../assets/image/a13.png" style="height: 24px;width: 24px;"></ion-img>
+    <ion-text class="m16" style="flex:1;margin-left: 15px;">Security</ion-text>
+    <ion-icon name="chevron-forward" style="font-size: 16px;" color="dis"></ion-icon>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);"></div>
+
+  <div class="list" routerLink="/help">
+    <ion-img src="../../../../assets/image/a14.png" style="height: 24px;width: 24px;"></ion-img>
+    <ion-text class="m16" style="flex:1;margin-left: 15px;">Help & Support</ion-text>
+    <ion-icon name="chevron-forward" style="font-size: 16px;" color="dis"></ion-icon>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);"></div>
+
+  <div class="list" routerLink="/faq">
+    <ion-img src="../../../../assets/image/a15.png" style="height: 24px;width: 24px;"></ion-img>
+    <ion-text class="m16" style="flex:1;margin-left: 15px;">FAQ</ion-text>
+    <ion-icon name="chevron-forward" style="font-size: 16px;" color="dis"></ion-icon>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);"></div>
+
+  <div class="list" >
+    <ion-icon name="moon-outline" style="font-size: 24px;color: var(--ion-color-primary);"/>
+    <ion-text class="m16" style="flex:1;margin-left: 15px;">Night mode</ion-text>
+    <ion-toggle [checked]="darkMode" (ionChange)="toggleDarkMode()"></ion-toggle>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);"></div>
+
+  <div class="list" routerLink="/login">
+    <ion-img src="../../../../assets/image/a16.png" style="height: 24px;width: 24px;"></ion-img>
+    <ion-text class="m16" style="flex:1;margin-left: 15px;">Logout</ion-text>
+    <ion-icon name="chevron-forward" style="font-size: 16px;" color="dis"></ion-icon>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);margin-bottom: 80px;"></div>
+
+</ion-content>

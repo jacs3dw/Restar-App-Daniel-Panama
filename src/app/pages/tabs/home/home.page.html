@@ -1,0 +1,122 @@
+<ion-header [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-bg);">
+  <ion-toolbar color="bg" style="padding: 0 15px;padding-top: 20px;--border-width: 0;">
+    <ion-buttons slot="start">
+      <ion-img src="../../../../assets/image/s1.png" style="height:56px;width:56px;" />
+    </ion-buttons>
+    <div style="margin-left: 15px;flex: 1;">
+      <ion-text class="r14" style="color: var(--ion-color-dis);">Hello Ferdous,</ion-text>
+      <div>
+        <ion-text class="subtitle" >Welcome Back!</ion-text>
+      </div>
+    </div>
+    <ion-buttons slot="end" routerLink="/notify">
+      <ion-img [src]="darkMode?'../../../../assets/image/s2d.png':'../../../../assets/image/s2.png'"
+        style="height: 24px;width: 24px;" />
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="list" style="margin: 10px 15px;">
+    <div class="input2" style="flex: 1;">
+      <ion-icon name="search"/>
+      <ion-input placeholder="Shipping number" style="margin-left: 10px;flex: 1;"/>
+    </div>
+    <div class="icon" style="margin-left: 10px;">
+      <ion-icon name="scan" style="font-size: 24px;color: var(--ion-color-bg);"/>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <div class="scroll list">
+    <div>
+      <ion-img src="../../../../assets/image/s4.png" style="height:150px;width:280px;" />
+    </div>
+    <div style="margin-left: 10px;">
+      <ion-img src="../../../../assets/image/s4.png" style="height:150px;width:280px;" />
+    </div>
+  </div>
+
+  <div class="list1" style="margin-top: 15px;">
+    <ion-text class="subtitle">Shipment History</ion-text>
+    <ion-text class="b14" style="color: var(--ion-color-primary);">View All</ion-text>
+  </div>
+
+  <div class="box shadow" style="margin-top: 15px;background-color: var(--ion-color-bg1);">
+    <div class="list">
+      <div style="flex: 1;">
+        <ion-text class="r14" style="color: var(--ion-color-dis);">Tracking Number</ion-text>
+        <div style="margin-top: 5px;">
+          <ion-text class="b16" >#124 784 8754</ion-text>
+        </div>
+      </div>
+      <div class="chip1">
+        <ion-text class="r10" style="color: #fff;">Pending</ion-text>
+      </div>
+    </div>
+    <div class="lines"></div>
+    <div class="list">
+      <ion-icon name="ellipse-outline" style="font-size: 16px;color: var(--ion-color-primary);"/>
+      <ion-text class="r14" style="margin-left: 10px;flex: 1;">Amsterdam, Netherlands</ion-text>
+      <ion-text class="r14" style="color: var(--ion-color-dis);" >24 Jun, 16:32</ion-text>
+    </div>
+    <div style="border: 1px dashed var(--ion-color-dis);width: 1px;height: 20px;margin-left: 7px;"></div>
+    <div class="list">
+      <ion-icon name="location-outline" style="font-size: 16px;color: var(--ion-color-txt);"/>
+      <ion-text class="r14" style="margin-left: 10px;flex: 1;">New York, USA</ion-text>
+      <ion-text class="r14" style="color: var(--ion-color-dis);" >30 Jun, 08:41</ion-text>
+    </div>
+  </div>
+
+  <div class="box shadow" style="margin-top: 15px;background-color: var(--ion-color-bg1);">
+    <div class="list">
+      <div style="flex: 1;">
+        <ion-text class="r14" style="color: var(--ion-color-dis);">Tracking Number</ion-text>
+        <div style="margin-top: 5px;">
+          <ion-text class="b16" >#124 784 8754</ion-text>
+        </div>
+      </div>
+      <div class="chip1">
+        <ion-text class="r10" style="color: #fff;">Pending</ion-text>
+      </div>
+    </div>
+    <div class="lines"></div>
+    <div class="list">
+      <ion-icon name="ellipse-outline" style="font-size: 16px;color: var(--ion-color-primary);"/>
+      <ion-text class="r14" style="margin-left: 10px;flex: 1;">Amsterdam, Netherlands</ion-text>
+      <ion-text class="r14" style="color: var(--ion-color-dis);" >24 Jun, 16:32</ion-text>
+    </div>
+    <div style="border: 1px dashed var(--ion-color-dis);width: 1px;height: 20px;margin-left: 7px;"></div>
+    <div class="list">
+      <ion-icon name="location-outline" style="font-size: 16px;color: var(--ion-color-txt);"/>
+      <ion-text class="r14" style="margin-left: 10px;flex: 1;">New York, USA</ion-text>
+      <ion-text class="r14" style="color: var(--ion-color-dis);" >30 Jun, 08:41</ion-text>
+    </div>
+  </div>
+
+  <div class="box shadow" style="margin-top: 15px;margin-bottom: 80px;background-color: var(--ion-color-bg1);">
+    <div class="list">
+      <div style="flex: 1;">
+        <ion-text class="r14" style="color: var(--ion-color-dis);">Tracking Number</ion-text>
+        <div style="margin-top: 5px;">
+          <ion-text class="b16" >#124 784 8754</ion-text>
+        </div>
+      </div>
+      <div class="chip1">
+        <ion-text class="r10" style="color: #fff;">Pending</ion-text>
+      </div>
+    </div>
+    <div class="lines"></div>
+    <div class="list">
+      <ion-icon name="ellipse-outline" style="font-size: 16px;color: var(--ion-color-primary);"/>
+      <ion-text class="r14" style="margin-left: 10px;flex: 1;">Amsterdam, Netherlands</ion-text>
+      <ion-text class="r14" style="color: var(--ion-color-dis);" >24 Jun, 16:32</ion-text>
+    </div>
+    <div style="border: 1px dashed var(--ion-color-dis);width: 1px;height: 20px;margin-left: 7px;"></div>
+    <div class="list">
+      <ion-icon name="location-outline" style="font-size: 16px;color: var(--ion-color-txt);"/>
+      <ion-text class="r14" style="margin-left: 10px;flex: 1;">New York, USA</ion-text>
+      <ion-text class="r14" style="color: var(--ion-color-dis);" >30 Jun, 08:41</ion-text>
+    </div>
+  </div>
+
+</ion-content>

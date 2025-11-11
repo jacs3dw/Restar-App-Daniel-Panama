@@ -1,0 +1,76 @@
+<ion-header [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-bg);">
+  <ion-toolbar color="bg" style="padding: 0px 15px;padding-top: 8px;--border-width: 0 0;">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline" style="font-size: 24px;" color="txt"></ion-icon>
+    </ion-buttons>
+    <div class="ion-text-center" >
+      <ion-text class="r14">Messages </ion-text>
+    </div>
+    <ion-icon  slot="end" name="ellipsis-vertical" style="font-size: 24px;" color="txt"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" color="bg">
+
+  <div class="list" routerLink="/chat">
+    <ion-img src="../../../../assets/image/d1.png" style="height: 48px;width: 48px;"></ion-img>
+    <div style="flex: 1;margin-left: 12px;">
+      <div class="list1">
+        <ion-text class="b16">Sowkot Hasan</ion-text>
+        <ion-text class="r12" style="color: var(--ion-color-dis);">10:30</ion-text>
+      </div>
+      <div class="list1">
+        <ion-text class="r14" style="color: var(--ion-color-dis);">Your package will arrive soon...</ion-text>
+        <div class="icon1" style="height: 24px;width: 24px;background-color: #F95A54;">
+          <ion-text class="m14" style="color: #FFFFFF;">2</ion-text>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);"></div>
+
+  <div routerLink="/chat" class="list">
+    <ion-img src="../../../../assets/image/d2.png" style="height: 48px;width: 48px;"></ion-img>
+    <div style="flex: 1;margin-left: 12px;">
+      <div class="list1">
+        <ion-text class="b16">Sowkot</ion-text>
+        <ion-text class="r12" style="color: var(--ion-color-dis);">Yeasterday</ion-text>
+      </div>
+      <div style="margin-top: 2px;">
+        <ion-text class="r14" style="color: var(--ion-color-dis);">Thank you sir!</ion-text>
+      </div>
+    </div>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);"></div>
+
+  <div routerLink="/chat" class="list">
+    <ion-img src="../../../../assets/image/d3.png" style="height: 48px;width: 48px;"></ion-img>
+    <div style="flex: 1;margin-left: 12px;">
+      <div class="list1">
+        <ion-text class="b16">Sowkot</ion-text>
+        <ion-text class="r12" style="color: var(--ion-color-dis);">10 Sep</ion-text>
+      </div>
+      <div style="margin-top: 2px;">
+        <ion-text class="r14" style="color: var(--ion-color-dis);">Yes, sure</ion-text>
+      </div>
+    </div>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input);"></div>
+
+  <div routerLink="/chat" class="list">
+    <ion-img src="../../../../assets/image/d4.png" style="height: 48px;width: 48px;"></ion-img>
+    <div style="flex: 1;margin-left: 12px;">
+      <div class="list1">
+        <ion-text class="b16">Sowkot</ion-text>
+        <ion-text class="r12" style="color: var(--ion-color-dis);">22 Aug</ion-text>
+      </div>
+      <div style="margin-top: 2px;">
+        <ion-text class="r14" style="color: var(--ion-color-dis);">Welcome!</ion-text>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

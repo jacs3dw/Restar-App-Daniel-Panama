@@ -1,0 +1,85 @@
+<ion-header [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-bg);">
+  <ion-toolbar color="bg" style="padding: 0px 15px;padding-top: 8px;--border-width: 0 0;">
+    <ion-buttons slot="start" routerLink="/services">
+      <ion-icon name="arrow-back-outline" style="font-size: 24px;" color="txt"></ion-icon>
+    </ion-buttons>
+    <div class="ion-text-center" >
+      <ion-text class="r14">Ship Parcel </ion-text>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" color="bg">
+
+  <div class="list" style="margin-bottom: 15px;">
+    <div>
+      <div class="icon" style="height: 16px;width: 16px;background-color:#F95A5420;">
+        <div class="icon" style="height: 4px;width: 4px;background-color: var(--ion-color-primary);"></div>
+      </div>
+      <div style="border: 1px solid #F95A5420;height: 40px;width: 1px;margin-left: 7px;"></div>
+      <div class="icon" style="height: 16px;width: 16px;background-color:#F95A5420;">
+        <ion-icon name="location-outline" style="font-size: 8px;color: var(--ion-color-primary);" />
+      </div>
+    </div>
+    <div style="margin-left: 15px;flex: 1;">
+      <div class="input2 shadow" style="background-color: var(--ion-color-bg1);height: 48px;">
+        <ion-text class="r12" style="color: var(--ion-color-dis);">From</ion-text>
+        <ion-input placeholder="Gouripur, Daudkandi" style="margin-left: 10px;flex: 1;"/>
+      </div>
+      <div class="input2 shadow" style="background-color: var(--ion-color-bg1);height: 48px;margin-top: 15px;">
+        <ion-text class="r12" style="color: var(--ion-color-dis);">To</ion-text>
+        <ion-input placeholder="Tejgaon, Dhaka" style="margin-left: 15px;flex: 1;"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="list1" style="margin-top: 30px;">
+    <ion-text class="subtitle">Packaging</ion-text>
+    <div class="icon" style="background-color: txt;margin-left: 15px;height: 36px;width: 36px;border-radius: 10px;">
+      <ion-img [src]="darkMode ? '../../../../assets/image/s3d.png' : '../../../../assets/image/s3.png' " style="height: 20px;width: 20px;"></ion-img>
+    </div>
+  </div>
+
+  <div class="box list shadow" style="margin-top: 18px;background-color: var(--ion-color-bg1);">
+    <ion-img src="../../../../assets/image/s6.png" style="height: 20px;width: 20px;"></ion-img>
+    <ion-text class="m16" style="flex:1;margin-left: 15px;">Box</ion-text>
+    <ion-icon name="chevron-down" style="font-size: 16px;" color="txt"></ion-icon>
+  </div>
+
+  <div class="list" style="margin-top: 20px;">
+    <div style="flex:0.4">
+      <ion-text class="r14" style="color: var(--ion-color-dis);"># Of Packages</ion-text>
+      <div class="shadow list box" style="background-color: var(--ion-color-bg1);margin-top: 10px;">
+        <div class="column" style="flex:1">
+          <ion-text class="m16">3</ion-text>
+          <ion-text class="r12" style="line-height: 24px;">Max 10</ion-text>
+        </div>
+        <ion-icon name="chevron-down" style="font-size: 16px;" color="txt"></ion-icon>
+      </div>
+    </div>
+
+    <div style="flex:0.6;margin-left: 15px;" >
+      <ion-text class="r14" style="color: var(--ion-color-dis);">Weight Per Package</ion-text>
+      <div class="shadow list box" style="background-color: var(--ion-color-bg1);margin-top: 10px;">
+        <div class="column" style="flex:1">
+          <ion-text class="m16">5 kg</ion-text>
+          <ion-text class="r12" style="line-height: 24px;">Max Weight 10 kg</ion-text>
+        </div>
+        <ion-icon name="chevron-down" style="font-size: 16px;" color="txt"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="list2" style="margin-top: 20px;">
+    <ion-img src="../../../../assets/image/s7.png" style="height:20px;width:20px;" />
+    <ion-text class="r14" style="margin-left: 10px;flex: 1;">Calculate shipping cost base on order
+      value or size of item</ion-text>
+  </div>
+
+  <div  class="btno" style="margin-top: 20px;margin-bottom: 18px;">
+    <ion-text class="b14">Add Package</ion-text>
+  </div>
+
+  <ion-button routerLink="/ship" expand="block" style="margin: 0 -10px; margin-bottom: 20px;--background: var(--ion-color-txt);--color:var(--ion-color-bg);">Next</ion-button>
+
+</ion-content>
