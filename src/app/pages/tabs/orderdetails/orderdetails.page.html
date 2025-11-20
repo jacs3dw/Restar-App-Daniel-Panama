@@ -21,22 +21,28 @@
   
   <!-- Imagen dinámica -->
   <img
-    [src]="orderDetails?.imageUrl"
-    style="width: 100%;border-radius: 12px;margin-top: 20px;"
-  />
+  [src]="orderDetails?.imageUrl"
+  style="
+    display: block;
+    width: 90%;
+    border-radius: 12px;
+    margin: 20px auto 0;
+  "
+/>
+
 
   <!-- Título dinámico -->
-  <ion-text class="b16" style="display: block;margin-top: 20px;color: #fff;">
+  <ion-text class="b16" style="display: block;margin-top: 20px;color: #fff; width: 90%; margin: 20px auto 0;">
     {{ orderDetails?.title }}
   </ion-text>
 
   <!-- Link dinámico -->
-  <ion-text class="r14" style="display: block;margin-top: 6px;color: var(--ion-color-primary);">
+  <ion-text class="r14" style="display: block;margin-top: 6px;color: var(--ion-color-primary); width: 90%; margin: 20px auto 0;">
     Link: {{ orderDetails?.link }}
   </ion-text>
 
   <!-- Descripción dinámica -->
-  <ion-text class="r14" style="display: block;margin-top: 15px;color: var(--ion-color-txt);line-height: 22px;">
+  <ion-text class="r14" style="display: block;margin-top: 15px;color: var(--ion-color-txt);line-height: 22px; width: 90%; margin: 20px auto 0;">
     {{ orderDetails?.description }}
   </ion-text>
 
