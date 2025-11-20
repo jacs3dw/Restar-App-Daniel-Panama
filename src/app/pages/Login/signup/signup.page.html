@@ -1,11 +1,13 @@
 <ion-header [translucent]="false" style="box-shadow: none;">
-  <ion-toolbar color="bg" style="padding: 0 15px;padding-top: 25px;--border-width: 0;">
-    <ion-buttons slot="start">
-      <ion-img [src]="darkMode?'../../../../assets/image/Logod.png':'../../../../assets/image/Logo.png'" style="height: 49px;width: 96px;"/>
+  <ion-toolbar color="bg" style="padding: 0 15px; padding-top: 25px; --border-width: 0; margin-bottom: 4vh;">
+    <ion-buttons slot="start" style="justify-content: flex-start; margin-left: 0; padding-left: 0;">
+      <ion-img 
+        [src]="darkMode?'../../../../assets/image/Logo_Restartify_Complet.svg':'../../../../assets/image/Logo_Restartify_Complet.svg'" 
+        style="width: 70vw; max-width: 70%; height: auto; margin-left: 0;"
+      />
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true" class="ion-padding">
   
   <ion-text class="title1">Welcome Back!</ion-text>
@@ -49,12 +51,12 @@
     <ion-text class="r14" style="margin-left: 10px;flex: 1;">Remember me</ion-text>
   </div>
 
-  <ion-button routerLink="/tabs" expand="block" style="margin: 20px 0;margin-top: 40px;--background: var(--ion-color-txt);--color: var(--ion-color-bg);">Sign up</ion-button>
+  <ion-button routerLink="/intro" expand="block" style="margin: 20px 0;margin-top: 40px;--background: var(--ion-color-txt);--color: #ffffff;">Sign up</ion-button>
 
   <div class="list" style="justify-content: center;margin-top: 15px;">
-    <div class="lines" style="margin: 0;width: 50px;border-color: var(--ion-color-primary);"></div>
-    <ion-text class="m14" style="color: var(--ion-color-primary);margin: 0 10px;">or</ion-text>
-    <div class="lines" style="margin: 0;width: 50px;border-color: var(--ion-color-primary);"></div>
+    <div class="lines" style="margin: 0;width: 50px;border-color: #488EEB;"></div>
+    <ion-text class="m14" style="color: #488EEB;margin: 0 10px;">or</ion-text>
+    <div class="lines" style="margin: 0;width: 50px;border-color: #488EEB;"></div>
   </div>
 
   <div class="list" style="justify-content: center;margin-top: 20px;margin-bottom: 15px;">
@@ -78,7 +80,7 @@
   <ion-toolbar color="bg" style="padding: 15px;--border-width: 0;">
     <div class="list" style="justify-content: center;">
       <ion-text class="m14" style="color: var(--ion-color-txt1);">Have Account? </ion-text>
-      <ion-text routerLink="/login" class="b14" style="color: var(--ion-color-primary);margin-left: 10px;"> Log In</ion-text>
+      <ion-text routerLink="/login" class="b14" style="color: #488EEB;margin-left: 10px;"> Log In</ion-text>
     </div>
   </ion-toolbar>
 </ion-footer>

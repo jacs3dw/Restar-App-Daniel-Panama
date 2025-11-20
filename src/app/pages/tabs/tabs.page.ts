@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonTabs } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -15,7 +16,7 @@ export class TabsPage implements OnInit {
 
   darkMode = false;
 
-  constructor() { }
+  constructor(public router:Router) { }
 
   ngOnInit(): void {
     this.checkAppMode();
@@ -33,6 +34,10 @@ export class TabsPage implements OnInit {
  
   setCurrentTab() {
     this.selectTab = this.tabs.getSelected();
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
   }
 
 }

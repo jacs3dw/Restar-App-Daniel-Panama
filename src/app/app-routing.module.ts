@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'intro',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -109,6 +109,11 @@ const routes: Routes = [
   {
     path: 'chat',
     loadChildren: () => import('./pages/Chat/chat/chat.module').then( m => m.ChatPageModule)
+  },
+  {
+    path: 'orderdetails',
+    loadComponent: () =>
+      import('./pages/tabs/orderdetails/orderdetails.page').then(m => m.OrderdetailsPage)
   },
 ];
 

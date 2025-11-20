@@ -1,6 +1,6 @@
 <ion-header [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-bg);">
   <ion-toolbar color="bg" style="padding: 0 15px;padding-top: 20px;--border-width: 0;">
-    <ion-buttons slot="start" routerLink="/cp3">
+    <ion-buttons slot="start" routerLink="/tabs/home">
       <ion-icon name="chevron-back" style="font-size: 24px;color: var(--ion-color-txt);" />
     </ion-buttons>
     <ion-title class="r14" style="text-align: center;">Compare Price</ion-title>
@@ -19,95 +19,102 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   
-  <div class="box2 shadow" style="background-color: var(--ion-color-bg1);">
+  <!-- 🔹 Opciones dinámicas -->
+  <div
+    class="box2 shadow"
+    *ngFor="let option of shippingOptions; let i = index; let last = last"
+    [ngStyle]="{
+      'background-color': 'var(--ion-color-bg1)',
+      'margin-top.px': i === 0 ? 0 : 15
+    }"
+  >
     <div class="list">
-      <div style="flex: 1;">
-        <ion-text class="b16">Fast Delivery Services</ion-text>
-        <div >
-          <ion-text class="r10" style="color: var(--ion-color-dis);">Delivery : <ion-text class="r10">8 - 10 Working Days</ion-text></ion-text>
+      <div class="list">
+        <div style="flex: 1;">
+          <!-- Nombre en blanco arriba -->
+          <ion-text class="b16" style="color: #FFFFFF;">
+            {{ option.name }}
+          </ion-text>
+  
+          <!-- URL abajo en azul tipo enlace -->
+          <div style="margin-top: 4px;">
+            <ion-text
+              class="r10"
+              style="
+                color: #488EEB;
+                text-decoration: underline;
+                cursor: pointer;
+                white-space: nowrap;
+              "
+            >
+              {{ option.url }}
+            </ion-text>
+          </div>
         </div>
       </div>
-      <ion-text class="b16">$ <ion-text class="apptitle" style="color: var(--ion-color-primary);"> 48.00</ion-text></ion-text>
+  
+      
+      <ion-text class="b16">
+        $ <ion-text class="apptitle" style="color: #488EEB;">
+          {{ option.price | number:'1.2-2' }}
+        </ion-text>
+      </ion-text>
     </div>
+
     <div class="list" style="margin-top: 18px;">
       <div class="list" style="flex: 1;">
-        <div class="chip1 list" style="background-color: var(--ion-color-bg2);">
-          <ion-icon name="star" style="font-size: 10px;color: #F95A54;"/>
-          <ion-text class="r10" style="margin-left: 5px;">4.8</ion-text>
-        </div>
-        <div class="chip1" style="background-color: var(--ion-color-bg2);margin-left: 10px;">
+        <!-- <div class="chip1 list" style="background-color: var(--ion-color-bg2);">
+          <ion-icon name="star" style="font-size: 10px;color: #F95A54;"></ion-icon>
+          <ion-text class="r10" style="margin-left: 5px;">
+            {{ option.rating }}
+          </ion-text>
+        </div> -->
+
+        <!-- <div
+          class="chip1"
+          *ngIf="option.hasTracking"
+          style="background-color: var(--ion-color-bg2);margin-left: 10px;"
+        >
           <ion-text class="r10">Tracking</ion-text>
-        </div>
+        </div> -->
       </div>
-      <div class="icon" style="height: 24px;width: 24px;border-radius: 8px;">
-        <ion-icon name="call" style="font-size: 10px;color: var(--ion-color-bg);"/>
-      </div>
-      <div class="icon" style="height: 24px;width: 24px;border-radius: 8px;margin-left: 7px;">
-        <ion-icon name="paper-plane" style="font-size: 10px;color: var(--ion-color-bg);"/>
-      </div>
+
+      <div
+  class="icon"
+  style="
+    padding: 1px 10px;
+    border-radius: 6px;
+    background-color: #ffffff;
+    border: 1px solid var(--ion-color-dis);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    height: auto;
+  "
+>
+  <ion-text style="color: #000000; font-size: 9px; white-space: nowrap;">
+    Do not buy
+  </ion-text>
+</div>
+
+
     </div>
   </div>
 
-  <div class="box2 shadow" style="background-color: var(--ion-color-bg1);margin-top: 15px;">
-    <div class="list">
-      <div style="flex: 1;">
-        <ion-text class="b16">USB Express Ltd.</ion-text>
-        <div >
-          <ion-text class="r10" style="color: var(--ion-color-dis);">Delivery : <ion-text class="r10">8 - 10 Working Days</ion-text></ion-text>
-        </div>
-      </div>
-      <ion-text class="b16">$ <ion-text class="apptitle" style="color: var(--ion-color-primary);"> 64.00</ion-text></ion-text>
-    </div>
-    <div class="list" style="margin-top: 18px;">
-      <div class="list" style="flex: 1;">
-        <div class="chip1 list" style="background-color: var(--ion-color-bg2);">
-          <ion-icon name="star" style="font-size: 10px;color: #F95A54;"/>
-          <ion-text class="r10" style="margin-left: 5px;">4.8</ion-text>
-        </div>
-        <div class="chip1" style="background-color: var(--ion-color-bg2);margin-left: 10px;">
-          <ion-text class="r10">Tracking</ion-text>
-        </div>
-      </div>
-      <div class="icon" style="height: 24px;width: 24px;border-radius: 8px;">
-        <ion-icon name="call" style="font-size: 10px;color: var(--ion-color-bg);"/>
-      </div>
-      <div class="icon" style="height: 24px;width: 24px;border-radius: 8px;margin-left: 7px;">
-        <ion-icon name="paper-plane" style="font-size: 10px;color: var(--ion-color-bg);"/>
-      </div>
-    </div>
-  </div>
+  <!-- 🔹 Botón usando la opción recomendada -->
+  <ion-button
+    routerLink="/payment"
+    expand="block"
+    style="margin: 20px 0;margin-top: 40px;--background: var(--ion-color-txt);--color: var(--ion-color-bg);"
+  >
+    Continue with
+    <ng-container *ngIf="recommendedOption">
+      &nbsp;{{ recommendedOption.name }}
+    </ng-container>
+  </ion-button>
 
-  <div class="box2 shadow" style="background-color: var(--ion-color-bg1);margin-top: 15px;">
-    <div class="list">
-      <div style="flex: 1;">
-        <ion-text class="b16">Fox Parcel</ion-text>
-        <div >
-          <ion-text class="r10" style="color: var(--ion-color-dis);">Delivery : <ion-text class="r10">8 - 10 Working Days</ion-text></ion-text>
-        </div>
-      </div>
-      <ion-text class="b16">$ <ion-text class="apptitle" style="color: var(--ion-color-primary);"> 60.00</ion-text></ion-text>
-    </div>
-    <div class="list" style="margin-top: 18px;">
-      <div class="list" style="flex: 1;">
-        <div class="chip1 list" style="background-color: var(--ion-color-bg2);">
-          <ion-icon name="star" style="font-size: 10px;color: #F95A54;"/>
-          <ion-text class="r10" style="margin-left: 5px;">4.8</ion-text>
-        </div>
-        <div class="chip1" style="background-color: var(--ion-color-bg2);margin-left: 10px;">
-          <ion-text class="r10">Tracking</ion-text>
-        </div>
-      </div>
-      <div class="icon" style="height: 24px;width: 24px;border-radius: 8px;">
-        <ion-icon name="call" style="font-size: 10px;color: var(--ion-color-bg);"/>
-      </div>
-      <div class="icon" style="height: 24px;width: 24px;border-radius: 8px;margin-left: 7px;">
-        <ion-icon name="paper-plane" style="font-size: 10px;color: var(--ion-color-bg);"/>
-      </div>
-    </div>
-  </div>
-
-  <ion-button routerLink="/services" expand="block" style="margin: 20px 0;margin-top: 40px;--background: var(--ion-color-txt);--color: var(--ion-color-bg);">Continue with Fast</ion-button>
-  <div routerLink="/tabs/history" class="btno" style="margin-bottom: 15px;">
+  <div routerLink="/tabs/home" class="btno" style="margin-bottom: 15px;">
     <ion-text class="b14">Back to Home</ion-text>
   </div>
 

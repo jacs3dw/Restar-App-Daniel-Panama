@@ -1,77 +1,181 @@
+<ion-header [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-bg);">
+  <ion-toolbar color="bg" style="padding: 0 15px;padding-top: 8px;--border-width: 0;">
+    <div class="list1" style="margin: 10px 15px;margin-top: 20px;">
+      <ion-icon
+        routerLink="/tabs/history"
+        name="arrow-back"
+        style="font-size: 24px;color: var(--ion-color-txt);"
+      ></ion-icon>
+      <ion-text class="r14">Track Order</ion-text>
+      <div></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" style="background-color: var(--ion-color-bg);">
 
+  <!-- Contenido scrollable -->
+  <div
+    class="page-scroll"
+    style="
+      padding: 0 20px 0 20px;
+      box-sizing: border-box;
+      max-height: 100vh;
+      overflow-y: auto;
+      margin-bottom: 40vh; /* Altura aprox. del bottom sheet */
+    "
+  >
+    <!-- Búsqueda -->
+    <div class="list" style="margin: 20px 0 10px 0; display:flex; align-items:center;">
+      <div class="input2" style="flex: 1; background-color: var(--ion-color-search); display:flex; align-items:center; padding: 10px; border-radius:8px;">
+        <ion-icon name="search"></ion-icon>
+        <ion-input
+          [placeholder]="trackingInfo?.shippingId || (orderDetails ? ('Order #' + orderDetails.id) : 'Enter Shipping ID')"
+          style="margin-left: 10px; flex: 1;"
+        ></ion-input>
+      </div>
 
-<ion-content [fullscreen]="true" [class]="darkMode?'bgd':'bg'">
+      <div class="icon" style="margin-left: 10px;">
+        <ion-icon name="scan" style="font-size: 24px; color: var(--ion-color-bg);"></ion-icon>
+      </div>
+    </div>
 
-  <div class="list1" style="margin: 10px 15px;margin-top: 20px;">
-    <ion-icon routerLink="/services" name="arrow-back" style="font-size: 24px;color: var(--ion-color-txt);" />
-    <ion-text class="r14">Track Order</ion-text>
-    <div></div>
+    <!-- Imagen dinámica -->
+    <img
+      *ngIf="orderDetails?.imageUrl"
+      [src]="orderDetails?.imageUrl"
+      style="width: 100%; border-radius: 12px; margin-top: 20px;"
+      alt="order image"
+    />
+
+    <!-- Título dinámico -->
+    <ion-text class="b16" style="display: block; margin-top: 20px; color: var(--ion-color-txt);">
+      {{ orderDetails?.title }}
+    </ion-text>
+
+    <!-- Link dinámico -->
+    <ion-text class="r14" style="display: block; margin-top: 6px; color: var(--ion-color-primary); word-break: break-all;">
+      Link: {{ orderDetails?.link }}
+    </ion-text>
+
+    <!-- Descripción dinámica -->
+    <ion-text class="r14" style="display: block; margin-top: 15px; color: var(--ion-color-txt); line-height: 22px;">
+      {{ orderDetails?.description }}
+    </ion-text>
+
+    <div style="height: 12px;"></div>
   </div>
 
-  <div class="list" style="margin: 10px 15px;">
-    <div class="input2" style="flex: 1;background-color: var(--ion-color-search);">
-      <ion-icon name="search" />
-      <ion-input placeholder="97847548956" style="margin-left: 10px;flex: 1;" />
-    </div>
-    <div class="icon" style="margin-left: 10px;">
-      <ion-icon name="scan" style="font-size: 24px;color: var(--ion-color-bg);" />
-    </div>
-  </div>
+  <!-- Bottom sheet fijo -->
+  <div
+    style="
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      padding: 15px 20px;
+      width: 100%;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      background-color: var(--ion-color-bg1);
+      max-height: 40vh;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+    ">
 
-  <div style="position: fixed;bottom: 0;padding: 15px;width: 100%;border-top-left-radius: 20px;border-top-right-radius: 20px;background-color: var(--ion-color-bg1);">
-    
     <ion-text class="r14" style="color: var(--ion-color-dis);">Shipping ID</ion-text>
     <div style="margin-top: 5px;">
-      <ion-text class="b16" >97847548956</ion-text>
+      <ion-text class="b16">
+        {{ trackingInfo?.shippingId || (orderDetails ? ('#' + orderDetails.id) : '-')}}
+      </ion-text>
     </div>
 
-    <div class="list" style="margin-top: 20px;">
-      <div>
-        <ion-text class="b14" >May 21</ion-text>
-        <div style="margin-bottom: 15px;">
-          <ion-text class="r12" style="color: var(--ion-color-dis);" >12:50</ion-text>
+    <!-- Timeline scrollable dentro del bottom sheet -->
+    <div
+      style="
+        margin-top: 20px;
+        flex: 1;
+        overflow-y: auto;
+      "
+    >
+      <div class="list" style="display:flex; gap:12px;">
+
+        <!-- Columna izquierda -->
+        <div style="display:flex; flex-direction:column; align-items:flex-start; min-width:72px;">
+          <ng-container *ngFor="let step of trackingInfo?.steps; let i = index">
+            <ion-text class="b14">{{ step.date }}</ion-text>
+            <div [ngStyle]="{ 'margin-bottom.px': i < (trackingInfo?.steps?.length || 0) - 1 ? 15 : 0 }">
+              <ion-text class="r12" style="color: var(--ion-color-dis);">
+                {{ step.time }}
+              </ion-text>
+            </div>
+          </ng-container>
         </div>
-        <ion-text class="b14" >May 20</ion-text>
-        <div style="margin-bottom: 15px;">
-          <ion-text class="r12" style="color: var(--ion-color-dis);" >14:00</ion-text>
+
+        <!-- Línea central -->
+        <div style="display:flex; flex-direction:column; align-items:center; padding-top:2px;">
+          <ng-container *ngFor="let step of trackingInfo?.steps; let i = index; let last = last">
+            <div
+              class="icon"
+              [ngStyle]="{
+                'height.px': 12,
+                'width.px': 12,
+                'border-radius.%': 50,
+                'background-color': step.status === 'pending' ? '#F95A5420' : 'var(--ion-color-primary)',
+                'display': 'flex',
+                'align-items': 'center',
+                'justify-content': 'center'
+              }"
+            >
+              <div
+                class="icon"
+                [ngStyle]="{
+                  'height.px': 4,
+                  'width.px': 4,
+                  'border-radius.%': 50,
+                  'background-color': step.status === 'pending' ? 'var(--ion-color-primary)' : 'var(--ion-color-bg)'
+                }"
+              ></div>
+            </div>
+
+            <div
+              *ngIf="!last"
+              [ngStyle]="{
+                'border-left': (step.status !== 'pending' && trackingInfo && trackingInfo.steps[i + 1] && trackingInfo.steps[i + 1].status !== 'pending')
+                  ? '3px solid var(--ion-color-primary)'
+                  : '3px solid var(--ion-color-search)',
+                'height.px': 50,
+                'margin-left.px': 4
+              }"
+            ></div>
+          </ng-container>
         </div>
-        <ion-text class="b14" >May 19</ion-text>
-        <div>
-          <ion-text class="r12" style="color: var(--ion-color-dis);" >13:00</ion-text>
+
+        <!-- Columna derecha -->
+        <div style="flex: 1; display:flex; flex-direction:column;">
+          <ng-container *ngFor="let step of trackingInfo?.steps; let i = index">
+            <ion-text class="b16">{{ step.title }}</ion-text>
+            <div [ngStyle]="{ 'margin-bottom.px': i < (trackingInfo?.steps?.length || 0) - 1 ? 15 : 0 }">
+              <ion-text class="r12" style="color: var(--ion-color-dis);">
+                {{ step.address }}
+              </ion-text>
+            </div>
+          </ng-container>
         </div>
-      </div>
-      <div style="margin: 0 15px;">
-        <div class="icon" style="height: 12px;width: 12px;background-color: var(--ion-color-primary);">
-          <div class="icon" style="height: 4px;width: 4px;background-color: var(--ion-color-bg);"></div>
-        </div>
-        <div style="border: 1px solid var(--ion-color-primary);height: 50px;width: 1px;margin-left: 5px;"></div>
-        <div class="icon" style="height: 12px;width: 12px;background-color: var(--ion-color-primary);">
-          <div class="icon" style="height: 4px;width: 4px;background-color: var(--ion-color-bg);"></div>
-        </div>
-        <div style="border: 1px solid var(--ion-color-search);height: 50px;width: 1px;margin-left: 5px;"></div>
-        <div class="icon" style="height: 12px;width: 12px;background-color:#F95A5420;">
-          <div class="icon" style="height: 4px;width: 4px;background-color: var(--ion-color-primary);"></div>
-        </div>
-      </div>
-      <div style="flex: 1;">
-        <ion-text class="b16">Package has been received</ion-text>
-        <div style="margin-bottom: 15px;">
-          <ion-text class="r12" style="color: var(--ion-color-dis);">W Market Rd, Gouripur 3517</ion-text>
-        </div>
-        <ion-text class="b16">Arrived at destination area</ion-text>
-        <div style="margin-bottom: 15px;">
-          <ion-text class="r12" style="color: var(--ion-color-dis);">W Market Rd, Gouripur 3517</ion-text>
-        </div>
-        <ion-text class="b16">Accept by Wedx</ion-text>
-        <div >
-          <ion-text class="r12" style="color: var(--ion-color-dis);">W Market Rd, Gouripur 3517</ion-text>
-        </div>
+
       </div>
     </div>
 
-    <ion-button routerLink="/services" expand="block" style="margin: 20px 0;margin-top: 40px;--background: var(--ion-color-txt);--color: var(--ion-color-bg);">Package Details</ion-button>
-
-
+    <ion-button
+      routerLink="/tabs/history"
+      expand="block"
+      style="
+        margin: 20px 0 0 0;
+        --background: var(--ion-color-txt);
+        --color: var(--ion-color-bg);
+      ">
+      Go To Back
+    </ion-button>
   </div>
 
 </ion-content>

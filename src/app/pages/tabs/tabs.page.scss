@@ -1,26 +1,96 @@
 ion-tabs {
-
     // --------------Custom Semi Transparent & Rounded Tabs----------------------
     ion-tab-bar {
-        position: absolute;
-        bottom: 0;
-        height: 70px;
-        width: 100%;        
-        --background:var(--ion-color-bg1);
-        border-top: 0px solid var(--ion-color-bg1);
+      position: absolute;
+      bottom: 0;
+      height: 70px;
+      width: 100%;        
+      --background: transparent;
+      background: transparent;
+      border: none;
+      
+      ion-tab-button {
+        --background: transparent;
+        background: transparent;
+        --color: #B1B1B1;
+        --color-selected: var(--ion-color-primary);
+        font-size: 12px;
+        font-family: DMSans-Regular;
         
-        ion-tab-button {
-            --background: var(--ion-color-bg1);
-            --color: #B1B1B1;
-            --color-selected: var(--ion-color-primary);
-            font-size: 12px;
-            font-family: DMSans-Regular;
-            ion-icon {
-                font-size: 1.5rem;
-            }
-           
+        ion-icon {
+          font-size: 1.5rem;
         }
-
+      }
     }
-
-}
+  }
+  
+  .custom-fab {
+    bottom: 24px;
+    --background: transparent;
+    --box-shadow: none;
+    z-index: 20; /* Aseguramos que el FAB esté por encima de todo */
+  }
+  
+  .fab-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Tamaño del logo */
+  .fab-icon img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+  
+  /* Contenedor de la esfera */
+  .sphere-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    z-index: 15; /* Mayor que el tab bar pero menor que el FAB */
+    pointer-events: none;
+  }
+  
+  .custom-sphere {
+    height: 90px;
+    width: 150px;
+    background-color: #23262F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    pointer-events: auto;
+    /* Eliminamos la sombra de la esfera */
+    box-shadow: none !important;
+  }
+  
+  .custom-tabbar-wrapper {
+    background: transparent;
+    position: relative;
+  }
+  
+  .custom-tabbar-bg {
+    background: transparent;
+  }
+  
+  .custom-tabbar {
+    background: #23262F !important;
+    backdrop-filter: blur(10px); 
+    border-radius: 40px 40px 0 0;
+    
+    /* Sombra solo en el tab bar, no en toda el área */
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.3) !important;
+    
+    /* Aseguramos que el tab bar esté detrás de la esfera */
+    z-index: 10;
+    position: relative;
+  }
+  
+  /* Ajustamos el gap para que los botones estén mejor posicionados */
+  .tabbar-gap {
+    width: 100px; /* Espacio para la esfera */
+  }

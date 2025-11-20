@@ -16,11 +16,12 @@ export class PaymentPage implements OnInit {
   
   close(){
     this.modalcontroller.dismiss();
-    this.router.navigate(['/tabs/history']);
+    this.router.navigate(['/trackorder']);
   }
   
   close1(){
     this.modalcontroller.dismiss();
+    this.router.navigate(['/tabs/home']);
   }
   ngOnInit(): void {
     this.checkAppMode();

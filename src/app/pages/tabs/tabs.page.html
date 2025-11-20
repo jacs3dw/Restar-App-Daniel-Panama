@@ -1,37 +1,44 @@
 <ion-tabs #tabs (ionTabsDidChange)="setCurrentTab()">
 
-  <ion-fab vertical="bottom" horizontal="center" translucent="true" >
-    <div  class="icon" style="background-color: var(--ion-color-txt);margin-bottom:30px;height: 48px;width: 48px;border-radius: 30px;">
-      <ion-icon name="add" style="font-size: 22px;color:var(--ion-color-bg);"/>
-    </div>
+  <!-- FAB central -->
+  <ion-fab
+    vertical="bottom"
+    horizontal="center"
+    translucent="true"
+    class="custom-fab"
+  >
+    <ion-tab-button tab="history">
+      <div class="fab-icon">
+        <img src="../../../assets/icon/Logo.svg" alt="Logo" />
+      </div>
+      Status
+    </ion-tab-button>
   </ion-fab>
 
-  <ion-tab-bar slot="bottom">
-
-    <ion-tab-button tab="home">
-      <ion-icon name="home-outline" style="font-size: 22px;margin-bottom: 5px;" />
-      Home
-    </ion-tab-button>
-
-    <ion-tab-button tab="history">
-      <ion-icon name="time-outline"  style="font-size: 22px;margin-bottom: 5px;" />
-      History
-    </ion-tab-button>
-
-    <div style="height: 70px;width: 70px;">
-
+  <!-- Contenedor del tab bar -->
+  <div class="custom-tabbar-wrapper">
+    <!-- Contenedor para la esfera - AHORA CON Z-INDEX MÁS ALTO -->
+    <div class="sphere-container">
+      <div class="custom-sphere">
+        <!-- contenido -->
+      </div>
     </div>
+    
+    <div class="custom-tabbar-bg"></div>
 
-    <ion-tab-button tab="message">
-      <ion-icon name="chatbubble-ellipses-outline" style="font-size: 22px;margin-bottom: 5px;" />
-      Chat
-    </ion-tab-button>
+    <ion-tab-bar slot="bottom" class="custom-tabbar">
+      <ion-tab-button tab="home">
+        <ion-icon name="home-outline" />
+        Home
+      </ion-tab-button>
 
-    <ion-tab-button tab="menu">
-      <ion-icon name="grid-outline"  style="font-size: 22px;margin-bottom: 5px;" />
-      Menu
-    </ion-tab-button>
+      <div class="tabbar-gap"></div>
 
-  </ion-tab-bar>
+      <ion-tab-button (click)="goToProfile()">
+        <ion-icon name="person-outline" />
+        My account
+      </ion-tab-button>
+    </ion-tab-bar>
+  </div>
 
 </ion-tabs>

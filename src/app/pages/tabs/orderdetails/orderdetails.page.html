@@ -1,0 +1,54 @@
+<ion-header [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-bg);">
+  <ion-toolbar color="bg" style="padding: 0 15px;padding-top: 8px;--border-width: 0;">
+    
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/tabs/home"
+        text=""
+        icon="arrow-back-outline"
+        style="color: var(--ion-color-txt);"
+      ></ion-back-button>
+    </ion-buttons>
+
+    <div class="ion-text-center" style="flex: 1;">
+      <ion-text class="r16">Track Order</ion-text>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" style="padding: 0 20px;background-color: var(--ion-color-bg);">
+  
+  <!-- Imagen dinámica -->
+  <img
+    [src]="orderDetails?.imageUrl"
+    style="width: 100%;border-radius: 12px;margin-top: 20px;"
+  />
+
+  <!-- Título dinámico -->
+  <ion-text class="b16" style="display: block;margin-top: 20px;color: #fff;">
+    {{ orderDetails?.title }}
+  </ion-text>
+
+  <!-- Link dinámico -->
+  <ion-text class="r14" style="display: block;margin-top: 6px;color: var(--ion-color-primary);">
+    Link: {{ orderDetails?.link }}
+  </ion-text>
+
+  <!-- Descripción dinámica -->
+  <ion-text class="r14" style="display: block;margin-top: 15px;color: var(--ion-color-txt);line-height: 22px;">
+    {{ orderDetails?.description }}
+  </ion-text>
+
+  <div style="margin-top: 60px;margin-bottom: 40px;">
+    <ion-button
+      expand="block"
+      shape="round"
+      (click)="goBack()"
+      style="--background: #fff;--color:#000;"
+    >
+      Go back
+    </ion-button>
+  </div>
+
+</ion-content>

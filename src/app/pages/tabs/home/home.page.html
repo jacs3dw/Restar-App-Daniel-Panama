@@ -10,7 +10,7 @@
       </div>
     </div>
     <ion-buttons slot="end" routerLink="/notify">
-      <ion-img [src]="darkMode?'../../../../assets/image/s2d.png':'../../../../assets/image/s2.png'"
+      <ion-img [src]="darkMode?'../../../../assets/image/s2.png':'../../../../assets/image/s2.png'"
         style="height: 24px;width: 24px;" />
     </ion-buttons>
   </ion-toolbar>
@@ -24,99 +24,140 @@
     </div>
   </div>
 </ion-header>
-
+<div class="scroll list" style="padding: 8px 15px; background-color: #141312;">
+  <div *ngFor="let item of items; let i = index;" (click)="onFocus(i)" [ngStyle]="{'background-color': item.focused ? 'var(--ion-color-txt)' : 'var(--ion-color-search)',
+                'border': item.focused ? 'none' : 'none',
+                'margin-right': item.focused ? '7px' : '7px',
+                'border-radius': '12px',
+                'padding': '0 20px'}"
+                style="height: 48px;justify-content: center;align-items: center;display: flex;">
+    <ion-text [style.color]="item.focused ? 'var(--ion-color-bg)' : 'var(--ion-color-txt)'" class="m16">{{ item.label
+      }}</ion-text>
+  </div>
+</div>
 <ion-content [fullscreen]="true" class="ion-padding">
   
   <div class="scroll list">
     <div>
-      <ion-img src="../../../../assets/image/s4.png" style="height:150px;width:280px;" />
+      <ion-img src="../../../../assets/image/s4.png" style="height:auto;width:280px;" />
     </div>
     <div style="margin-left: 10px;">
-      <ion-img src="../../../../assets/image/s4.png" style="height:150px;width:280px;" />
+      <ion-img src="../../../../assets/image/s4.png" style="height:auto;width:280px;" />
     </div>
   </div>
 
   <div class="list1" style="margin-top: 15px;">
-    <ion-text class="subtitle">Shipment History</ion-text>
-    <ion-text class="b14" style="color: var(--ion-color-primary);">View All</ion-text>
+    <ion-text class="subtitle">Results found</ion-text>
+  
+    <ion-text
+      class="b14"
+      style="color: #488EEB;"
+      routerLink="/tabs/history"
+      font-size="large" 
+    >
+      View All
+    </ion-text>
   </div>
+  
 
-  <div class="box shadow" style="margin-top: 15px;background-color: var(--ion-color-bg1);">
-    <div class="list">
+    <!-- 🔹 LISTA DINÁMICA DE SHIPMENTS -->
+  <div
+    class="box shadow"
+    *ngFor="let shipment of shipments; let last = last"
+    [style.margin-top.px]="15"
+    [style.margin-bottom.px]="last ? 80 : 0"
+    style="background-color: var(--ion-color-bg1); border-radius: 12px; padding: 16px;"
+    (click)="goToOrderDetails($event)"
+  >
+  
+    <!-- Encabezado con "Title:" + icono y título + 'I want to delete' -->
+    <div class="list" style="align-items: flex-start; margin-bottom: 12px;">
       <div style="flex: 1;">
-        <ion-text class="r14" style="color: var(--ion-color-dis);">Tracking Number</ion-text>
-        <div style="margin-top: 5px;">
-          <ion-text class="b16" >#124 784 8754</ion-text>
+        <!-- Fila con "Title:" + icono a la derecha -->
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <ion-text class="b16" style="color: rgba(255, 255, 255, 0.6); display: block; margin-bottom: 4px;">
+            Title:
+          </ion-text>
+  
+          <!-- Si está Pending, mostrar warning.svg -->
+          <img
+            *ngIf="shipment.status === 'Pending'; else okIcon"
+            src="../../../../assets/icon/warning.svg"
+            alt="Warning"
+            style="width: 20px; height: 20px;"
+          />
+  
+          <!-- Si NO está Pending, mostrar chulito verde -->
+          <ng-template #okIcon>
+            <ion-icon
+              name="checkmark-circle"
+              style="font-size: 20px; color: #4CAF50;"
+            ></ion-icon>
+          </ng-template>
+        </div>
+  
+        <!-- Fila con título dinámico + texto 'I want to delete' a la derecha -->
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-top: 4px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+          "
+        >
+          <!-- Título del envío -->
+          <ion-text class="b16" style="color: var(--ion-color-txt); flex: 1;">
+            {{ shipment.title }}
+          </ion-text>
+  
+          <!-- 'I want to delete' como texto clickeable -->
+          <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+            <ion-button
+              size="small"
+              style="
+                --background: #488EEB;
+                --color: #ffffff;
+                --border-radius: 8px;
+                height: 28px;
+                font-size: 11px;
+              "
+              (click)="goToCp4($event)"
+            >
+              I want to delete
+            </ion-button>
+          </div>
         </div>
       </div>
-      <div class="chip1">
-        <ion-text class="r10" style="color: #fff;">Pending</ion-text>
+    </div>
+  
+    <!-- Contenido debajo de la línea: URL + descripción -->
+    <div>
+      <!-- Enlace -->
+      <div style="margin-top: 8px; margin-bottom: 8px;">
+        <ion-text
+          class="r12"
+          style="
+            color: #488EEB;
+            cursor: pointer;
+            word-break: break-all;
+          "
+          (click)="openShipmentUrl($event, shipment.url)"
+        >
+          {{ shipment.url }}
+        </ion-text>
+      </div>
+  
+      <!-- Descripción -->
+      <div style="margin-bottom: 12px;">
+        <ion-text class="r12" style="color: var(--ion-color-dis); line-height: 1.4;">
+          {{ shipment.description }}
+        </ion-text>
       </div>
     </div>
-    <div class="lines"></div>
-    <div class="list">
-      <ion-icon name="ellipse-outline" style="font-size: 16px;color: var(--ion-color-primary);"/>
-      <ion-text class="r14" style="margin-left: 10px;flex: 1;">Amsterdam, Netherlands</ion-text>
-      <ion-text class="r14" style="color: var(--ion-color-dis);" >24 Jun, 16:32</ion-text>
-    </div>
-    <div style="border: 1px dashed var(--ion-color-dis);width: 1px;height: 20px;margin-left: 7px;"></div>
-    <div class="list">
-      <ion-icon name="location-outline" style="font-size: 16px;color: var(--ion-color-txt);"/>
-      <ion-text class="r14" style="margin-left: 10px;flex: 1;">New York, USA</ion-text>
-      <ion-text class="r14" style="color: var(--ion-color-dis);" >30 Jun, 08:41</ion-text>
-    </div>
-  </div>
-
-  <div class="box shadow" style="margin-top: 15px;background-color: var(--ion-color-bg1);">
-    <div class="list">
-      <div style="flex: 1;">
-        <ion-text class="r14" style="color: var(--ion-color-dis);">Tracking Number</ion-text>
-        <div style="margin-top: 5px;">
-          <ion-text class="b16" >#124 784 8754</ion-text>
-        </div>
-      </div>
-      <div class="chip1">
-        <ion-text class="r10" style="color: #fff;">Pending</ion-text>
-      </div>
-    </div>
-    <div class="lines"></div>
-    <div class="list">
-      <ion-icon name="ellipse-outline" style="font-size: 16px;color: var(--ion-color-primary);"/>
-      <ion-text class="r14" style="margin-left: 10px;flex: 1;">Amsterdam, Netherlands</ion-text>
-      <ion-text class="r14" style="color: var(--ion-color-dis);" >24 Jun, 16:32</ion-text>
-    </div>
-    <div style="border: 1px dashed var(--ion-color-dis);width: 1px;height: 20px;margin-left: 7px;"></div>
-    <div class="list">
-      <ion-icon name="location-outline" style="font-size: 16px;color: var(--ion-color-txt);"/>
-      <ion-text class="r14" style="margin-left: 10px;flex: 1;">New York, USA</ion-text>
-      <ion-text class="r14" style="color: var(--ion-color-dis);" >30 Jun, 08:41</ion-text>
-    </div>
-  </div>
-
-  <div class="box shadow" style="margin-top: 15px;margin-bottom: 80px;background-color: var(--ion-color-bg1);">
-    <div class="list">
-      <div style="flex: 1;">
-        <ion-text class="r14" style="color: var(--ion-color-dis);">Tracking Number</ion-text>
-        <div style="margin-top: 5px;">
-          <ion-text class="b16" >#124 784 8754</ion-text>
-        </div>
-      </div>
-      <div class="chip1">
-        <ion-text class="r10" style="color: #fff;">Pending</ion-text>
-      </div>
-    </div>
-    <div class="lines"></div>
-    <div class="list">
-      <ion-icon name="ellipse-outline" style="font-size: 16px;color: var(--ion-color-primary);"/>
-      <ion-text class="r14" style="margin-left: 10px;flex: 1;">Amsterdam, Netherlands</ion-text>
-      <ion-text class="r14" style="color: var(--ion-color-dis);" >24 Jun, 16:32</ion-text>
-    </div>
-    <div style="border: 1px dashed var(--ion-color-dis);width: 1px;height: 20px;margin-left: 7px;"></div>
-    <div class="list">
-      <ion-icon name="location-outline" style="font-size: 16px;color: var(--ion-color-txt);"/>
-      <ion-text class="r14" style="margin-left: 10px;flex: 1;">New York, USA</ion-text>
-      <ion-text class="r14" style="color: var(--ion-color-dis);" >30 Jun, 08:41</ion-text>
-    </div>
+  
   </div>
 
 </ion-content>
