@@ -17,13 +17,21 @@
   <div class="list" style="margin: 10px 15px;">
     <div class="input2" style="flex: 1;">
       <ion-icon name="search"/>
-      <ion-input placeholder="Shipping number" style="margin-left: 10px;flex: 1;"/>
+      
+      <ion-input 
+        placeholder="Shipping number" 
+        style="margin-left: 10px;flex: 1;"
+        [(ngModel)]="searchText"
+        (input)="onSearchChange()"
+      />
+
     </div>
     <div class="icon" style="margin-left: 10px;">
       <ion-icon name="scan" style="font-size: 24px;color: var(--ion-color-bg);"/>
     </div>
   </div>
 </ion-header>
+
 <div class="scroll list" style="padding: 8px 15px; background-color: #141312;">
   <div *ngFor="let item of items; let i = index;" (click)="onFocus(i)" [ngStyle]="{'background-color': item.focused ? 'var(--ion-color-txt)' : 'var(--ion-color-search)',
                 'border': item.focused ? 'none' : 'none',
@@ -35,6 +43,7 @@
       }}</ion-text>
   </div>
 </div>
+
 <ion-content [fullscreen]="true" class="ion-padding">
   
   <div class="scroll list">
@@ -59,8 +68,6 @@
     </ion-text>
   </div>
   
-
-    <!-- 🔹 LISTA DINÁMICA DE SHIPMENTS -->
   <div
     class="box shadow"
     *ngFor="let shipment of shipments; let last = last"
@@ -69,8 +76,6 @@
     style="background-color: var(--ion-color-bg1); border-radius: 12px; padding: 16px;"
     (click)="goToOrderDetails($event)"
   >
-  
-    <!-- Encabezado con "Title:" + icono y título + 'I want to delete' -->
     <div class="list" style="align-items: flex-start; margin-bottom: 12px;">
       <div style="flex: 1;">
         <!-- Fila con "Title:" + icono a la derecha -->
@@ -79,7 +84,6 @@
             Title:
           </ion-text>
   
-          <!-- Si está Pending, mostrar warning.svg -->
           <img
             *ngIf="shipment.status === 'Pending'; else okIcon"
             src="../../../../assets/icon/warning.svg"
@@ -87,7 +91,6 @@
             style="width: 20px; height: 20px;"
           />
   
-          <!-- Si NO está Pending, mostrar chulito verde -->
           <ng-template #okIcon>
             <ion-icon
               name="checkmark-circle"
@@ -96,7 +99,6 @@
           </ng-template>
         </div>
   
-        <!-- Fila con título dinámico + texto 'I want to delete' a la derecha -->
         <div
           style="
             display: flex;
@@ -108,12 +110,11 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
           "
         >
-          <!-- Título del envío -->
+
           <ion-text class="b16" style="color: var(--ion-color-txt); flex: 1;">
             {{ shipment.title }}
           </ion-text>
-  
-          <!-- 'I want to delete' como texto clickeable -->
+
           <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
             <ion-button
               size="small"

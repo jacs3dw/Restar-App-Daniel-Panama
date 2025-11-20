@@ -14,27 +14,31 @@ interface Shipment {
   origin: ShipmentStop;
   destination: ShipmentStop;
 
-  // 🔹 Nuevos campos:
   title: string;
   url: string;
-  description: string; // menos de 100 caracteres
+  description: string; 
 }
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  standalone:false,
+  standalone: false,
 })
-
 
 export class HomePage implements OnInit {
 
   darkMode = false;
+
   shipments: Shipment[] = [];
 
-  constructor(private router: Router) {}
-  
+  allShipments: Shipment[] = [];
+  selectedFilter: string = 'ALL';
+
+  searchText: string = '';
+
+  constructor(private router: Router) { }
+
   ngOnInit(): void {
     this.checkAppMode();
     this.loadShipments();
@@ -42,22 +46,22 @@ export class HomePage implements OnInit {
 
   async checkAppMode() {
     const checkIsDarkMode = localStorage.getItem('darkModeActivated');
-    // const checkIsDarkMode = await Preferences.get({key: 'darkModeActivated'});
-    console.log(checkIsDarkMode);
     checkIsDarkMode == 'true'
       ? (this.darkMode = true)
       : (this.darkMode = false);
     document.body.classList.toggle('dark', this.darkMode);
   }
+
   items = [
-    { label: 'All',        value: 'ALL',       focused: true },
-    { label: 'Google',  value: 'Google', focused: false },
-    { label: 'Youtube',    value: 'Youtube',   focused: false },
-    { label: 'Bing',    value: 'Bing',   focused: false },
-    { label: 'DuckDuckGo',    value: 'DuckDuckGo',   focused: false },
+    { label: 'All', value: 'ALL', focused: true },
+    { label: 'Google', value: 'Google', focused: false },
+    { label: 'Youtube', value: 'Youtube', focused: false },
+    { label: 'Bing', value: 'Bing', focused: false },
+    { label: 'DuckDuckGo', value: 'DuckDuckGo', focused: false },
   ];
+
   loadShipments() {
-    this.shipments = [
+    this.allShipments = [
       {
         trackingNumber: '#124 784 8754',
         status: 'Completed',
@@ -73,7 +77,7 @@ export class HomePage implements OnInit {
           dateTime: '30 Jun, 08:41',
         },
         title: 'Package from Amsterdam to New York',
-        url: 'www.fastdelivery.com/track/1247848754',
+        url: 'www.google.com/track/1247848754',
         description: 'Your package is being processed and will be shipped soon.',
       },
       {
@@ -113,32 +117,62 @@ export class HomePage implements OnInit {
         description: 'Your package is on the way and will arrive very soon.',
       },
     ];
+
+
+    this.shipments = [...this.allShipments];
   }
-  
 
   goToCp4(event: Event) {
-    event.stopPropagation(); 
+    event.stopPropagation();
     this.router.navigateByUrl('/cp4');
   }
-  
+
   goToOrderDetails(event: Event) {
-    event.stopPropagation();       // 👈 clave para que no dispare el click del padre
+    event.stopPropagation();
     this.router.navigateByUrl('/orderdetails');
   }
 
   openShipmentUrl(event: Event, url: string) {
-    event.stopPropagation(); 
+    event.stopPropagation();
     window.open(`https://${url}`, '_blank');
   }
-  
+
   onDeleteShipment(event: Event, shipment: Shipment) {
-    event.stopPropagation(); // no disparar goToCp4
-  
-    // Aquí luego conectas con tu backend.
-    // Por ahora, lo quitamos del array para simular:
+    event.stopPropagation();
     this.shipments = this.shipments.filter(s => s !== shipment);
   }
+
   onFocus(index: number) {
+    this.items.forEach((it, i) => it.focused = i === index);
+
+    this.selectedFilter = this.items[index].value;
+
+    this.applyFilter();
+  }
+
+  onSearchChange() {
+    this.applyFilter();
+  }
+
+  applyFilter() {
+
+    let filtered = [...this.allShipments];
+
+    if (this.selectedFilter !== 'ALL') {
+      const filterWord = this.selectedFilter.toLowerCase();
+      filtered = filtered.filter(s =>
+        s.url.toLowerCase().includes(filterWord)
+      );
+    }
+
+    if (this.searchText.trim() !== '') {
+      const text = this.searchText.toLowerCase();
+      filtered = filtered.filter(s =>
+        s.title.toLowerCase().includes(text)
+      );
+    }
+
+    this.shipments = filtered;
   }
 
 }
