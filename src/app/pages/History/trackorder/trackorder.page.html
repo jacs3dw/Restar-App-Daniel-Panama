@@ -24,20 +24,6 @@
       margin-bottom: 40vh; /* Altura aprox. del bottom sheet */
     "
   >
-    <!-- Búsqueda -->
-    <div class="list" style="margin: 20px 0 10px 0; display:flex; align-items:center;">
-      <div class="input2" style="flex: 1; background-color: var(--ion-color-search); display:flex; align-items:center; padding: 10px; border-radius:8px;">
-        <ion-icon name="search"></ion-icon>
-        <ion-input
-          [placeholder]="trackingInfo?.shippingId || (orderDetails ? ('Order #' + orderDetails.id) : 'Enter Shipping ID')"
-          style="margin-left: 10px; flex: 1;"
-        ></ion-input>
-      </div>
-
-      <div class="icon" style="margin-left: 10px;">
-        <ion-icon name="scan" style="font-size: 24px; color: var(--ion-color-bg);"></ion-icon>
-      </div>
-    </div>
 
     <!-- Imagen dinámica -->
     <img
@@ -121,7 +107,7 @@
                 'height.px': 12,
                 'width.px': 12,
                 'border-radius.%': 50,
-                'background-color': step.status === 'pending' ? '#F95A5420' : 'var(--ion-color-primary)',
+                'background-color': step.status === 'pending' ? '#3AC479' : '#488EEB',
                 'display': 'flex',
                 'align-items': 'center',
                 'justify-content': 'center'
@@ -133,7 +119,7 @@
                   'height.px': 4,
                   'width.px': 4,
                   'border-radius.%': 50,
-                  'background-color': step.status === 'pending' ? 'var(--ion-color-primary)' : 'var(--ion-color-bg)'
+                  'background-color': step.status === 'pending' ? '#FFFFFFFF' : 'var(--ion-color-bg)'
                 }"
               ></div>
             </div>
@@ -142,10 +128,10 @@
               *ngIf="!last"
               [ngStyle]="{
                 'border-left': (step.status !== 'pending' && trackingInfo && trackingInfo.steps[i + 1] && trackingInfo.steps[i + 1].status !== 'pending')
-                  ? '3px solid var(--ion-color-primary)'
+                  ? '3px solid #488EEB'
                   : '3px solid var(--ion-color-search)',
                 'height.px': 50,
-                'margin-left.px': 4
+                'margin-left.px': 0
               }"
             ></div>
           </ng-container>
