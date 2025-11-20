@@ -40,13 +40,13 @@ export class TrackorderPage implements OnInit {
       shippingId: '97847548956',
       steps: [
         { date: 'May 21', time: '12:50', title: 'Package has been received', address: 'W Market Rd, Gouripur 3517', status: 'done' },
-        { date: 'May 19', time: '13:00', title: 'Accept by Wedx', address: 'W Market Rd, Gouripur 3517', status: 'pending' },
+        { date: 'May 19', time: '13:00', title: 'Accept by Wedx', address: 'W Market Rd, Gouripur 3517', status: 'done' },
       ],
     },
     {
       shippingId: '55555555555',
       steps: [
-        { date: 'Jun 10', time: '09:30', title: 'Package in transit', address: 'Main Street 123, City', status: 'current' },
+        { date: 'Jun 10', time: '09:30', title: 'Package in transit', address: 'Main Street 123, City', status: 'done' },
         { date: 'Jun 09', time: '16:10', title: 'Package picked up', address: 'Warehouse 45, City', status: 'done' },
       ],
     },
