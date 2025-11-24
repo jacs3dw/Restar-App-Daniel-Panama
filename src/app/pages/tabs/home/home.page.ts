@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserSessionService } from '../../services/session/user-session.service';
 
 interface ShipmentStop {
   icon: 'ellipse-outline' | 'location-outline';
@@ -37,11 +38,17 @@ export class HomePage implements OnInit {
 
   searchText: string = '';
 
-  constructor(private router: Router) { }
+  userName: string = '';
+
+  constructor(
+    private router: Router,
+    private userSession: UserSessionService
+  ) { }
 
   ngOnInit(): void {
     this.checkAppMode();
     this.loadShipments();
+    this.loadUserName();
   }
 
   async checkAppMode() {
@@ -50,6 +57,11 @@ export class HomePage implements OnInit {
       ? (this.darkMode = true)
       : (this.darkMode = false);
     document.body.classList.toggle('dark', this.darkMode);
+  }
+
+  loadUserName() {
+    this.userName = this.userSession.getUserName();
+    console.log('Usuario en HomePage:', this.userSession.getUser());
   }
 
   items = [

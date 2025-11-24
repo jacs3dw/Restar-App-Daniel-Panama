@@ -4,7 +4,9 @@
       <ion-img src="../../../../assets/image/s1.png" style="height:56px;width:56px;" />
     </ion-buttons>
     <div style="margin-left: 15px;flex: 1;">
-      <ion-text class="r14" style="color: var(--ion-color-dis);">Hello Ferdous,</ion-text>
+      <ion-text class="r14" style="color: var(--ion-color-dis);">
+        Hello {{ userName || 'User' }},
+      </ion-text>
       <div>
         <ion-text class="subtitle" >Welcome Back!</ion-text>
       </div>
@@ -25,9 +27,6 @@
         (input)="onSearchChange()"
       />
 
-    </div>
-    <div class="icon" style="margin-left: 10px;">
-      <ion-icon name="scan" style="font-size: 24px;color: var(--ion-color-bg);"/>
     </div>
   </div>
 </ion-header>

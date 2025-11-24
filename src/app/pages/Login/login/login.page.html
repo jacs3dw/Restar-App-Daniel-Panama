@@ -19,7 +19,12 @@
   <div class="list" style="margin-top: 40px;">
     <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Email</ion-text>
     <div class="input" style="flex: 1;">
-      <ion-input placeholder="ferdous@gmail.com" style="flex: 1;"/>
+      <ion-input
+        [(ngModel)]="email"
+        name="email"
+        placeholder="Ingresa tu email"
+        style="flex: 1;"
+      ></ion-input>
     </div>
   </div>
 
@@ -34,37 +39,12 @@
     </div>
   </div>
 
-  <ion-button routerLink="/intro" expand="block" style="margin: 20px 0;margin-top: 40px;--background: var(--ion-color-txt);--color: var(--ion-color-bg);">Log in</ion-button>
-
-  <div class="list" style="justify-content: center;margin-top: 15px;">
-    <div class="lines" style="margin: 0;width: 50px;border-color: #488EEB;"></div>
-    <ion-text class="m14" style="color: #488EEB;margin: 0 10px;">or</ion-text>
-    <div class="lines" style="margin: 0;width: 50px;border-color: #488EEB;"></div>
-  </div>
-
-  <div class="list" style="justify-content: center;margin-top: 20px;margin-bottom: 15px;">
-    <div class="icon1">
-      <ion-img src="../../../../assets/image/google.png" style="height: 16px;width: 16px;"/>
-    </div>
-    <div class="icon1" style="margin-left: 10px;">
-      <ion-img src="../../../../assets/image/fb.png" style="height: 15px;width: 7px;"/>
-    </div>
-    <div class="icon1" style="margin-left: 10px;">
-      <ion-img src="../../../../assets/image/twi.png" style="height: 13px;width: 16px;"/>
-    </div>
-    <div class="icon1" style="margin-left: 10px;">
-      <ion-img src="../../../../assets/image/app.png" style="height: 16px;width: 13px;"/>
-      hola
-    </div>
-  </div>
+  <ion-button
+    expand="block"
+    style="margin: 20px 0;margin-top: 40px;--background: var(--ion-color-txt);--color: var(--ion-color-bg);"
+    (click)="onLoginClick()"
+  >
+    Log in
+  </ion-button>
 
 </ion-content>
-
-<ion-footer [translucent]="false" style="box-shadow: none;">
-  <ion-toolbar color="bg" style="padding: 15px;--border-width: 0;">
-    <div class="list" style="justify-content: center;">
-      <ion-text class="m14" style="color: var(--ion-color-txt1);">New User? </ion-text>
-      <ion-text routerLink="/signup" class="b14" style="color: #488EEB;margin-left: 10px;"> Create Account</ion-text>
-    </div>
-  </ion-toolbar>
-</ion-footer>
