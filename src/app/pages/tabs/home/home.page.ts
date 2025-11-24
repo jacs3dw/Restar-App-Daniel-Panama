@@ -17,7 +17,7 @@ interface Shipment {
 
   title: string;
   url: string;
-  description: string; 
+  description: string;
 }
 
 @Component({
@@ -89,7 +89,7 @@ export class HomePage implements OnInit {
           dateTime: '30 Jun, 08:41',
         },
         title: 'Package from Amsterdam to New York',
-        url: 'www.google.com/track/1247848754',
+        url: 'https://www.google.com/',
         description: 'Your package is being processed and will be shipped soon.',
       },
       {
@@ -107,7 +107,7 @@ export class HomePage implements OnInit {
           dateTime: '12 Jul, 09:15',
         },
         title: 'Order delivered to Paris',
-        url: 'www.fastdelivery.com/track/8744552211',
+        url: 'https://www.youtube.com/',
         description: 'This shipment has been successfully delivered to the recipient.',
       },
       {
@@ -125,9 +125,11 @@ export class HomePage implements OnInit {
           dateTime: '16 Jul, 14:10',
         },
         title: 'Shipment en route to Lisbon',
-        url: 'www.fastdelivery.com/track/9981237777',
+        url: 'https://www.bing.com/',
         description: 'Your package is on the way and will arrive very soon.',
       },
+        
+
     ];
 
 

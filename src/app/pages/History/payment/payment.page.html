@@ -1,87 +1,261 @@
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 <ion-header [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-bg);">
-  <ion-toolbar color="bg" style="padding: 0px 15px;padding-top: 8px;--border-width: 0 0;">
-    <ion-buttons slot="start" routerLink="/cp4">
-      <ion-icon name="arrow-back-outline" style="font-size: 24px;" color="txt"></ion-icon>
-    </ion-buttons>
-    <div class="ion-text-center" >
-      <ion-text class="r14">Payment</ion-text>
-    </div>
-  </ion-toolbar>
+    <ion-toolbar color="bg" style="padding: 0px 15px;padding-top: 8px;--border-width: 0 0;">
+        <ion-buttons slot="start" routerLink="/cp4">
+            <ion-icon name="arrow-back-outline" style="font-size: 24px;" color="txt"></ion-icon>
+          </ion-buttons>
+        <div class="ion-text-center">
+            <ion-text class="r14">Payment</ion-text>
+          </div>
+      </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding" color="bg">
 
-  <div style="margin-top: -10px;">
-    <ion-text class="subtitle">Promo code</ion-text>
-  </div> 
+      <div style="display: flex; align-items: center; margin-top: -30px;">
+        <ion-img src="../../../../assets/image/a19.png" style="height: 33px;width: 33px; margin-right: 15px;"></ion-img>
+        <ion-text class="subtitle">Choose your payment method</ion-text>
+      </div>
+     
+    <div style="margin-top: 10px; margin-left: -12px;">
+        <ion-text class="subtitle">Order Summary</ion-text>
+      </div>
 
-  <div class="list" style="margin-top: 15px;">
-    <ion-img src="../../../../assets/image/a19.png" style="height: 33px;width: 33px;"></ion-img>
-    <div style="flex:1;margin-left: 15px;">
-      <ion-text class="b16">Yah! You Saved<ion-text class="b16" style="color: var(--ion-color-primary);"> $7.95 </ion-text></ion-text>
-      <div style="margin-top: 2px;">
-        <ion-text class="r14" style="color: var(--ion-color-dis);">Cuppon Applied</ion-text>
+  <div class="list1" style="
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+">
+    <div style="width: 150px; margin-left: 10px;">
+      <ion-text class="r14" style="font-size: 16px;">Order Amount</ion-text>
+    </div>
+
+    <div>
+      <ion-text class="b16" style="font-size: 20px; font-family: 'Merriweather', serif;">
+        $48.00
+      </ion-text>
+    </div>
+  </div>
+
+  <div class="list1" style="
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+">
+    <div style="width: 150px; margin-left: 10px;">
+      <ion-text class="r14" style="font-size: 16px;">Home Delivery</ion-text>
+    </div>
+
+    <div>
+      <ion-text class="b16" style="font-size: 20px; font-family: 'Merriweather', serif;">
+        $5.00
+      </ion-text>
+    </div>
+  </div>
+
+  <div class="lines" style="border-color: var(--ion-color-input); margin-top: 8px; margin-bottom: 5px; height: 1px;">
+  </div>
+
+
+  <div class="list1" style="
+    margin-top: 9px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+">
+    <div style="width: 150px; margin-left: 10px;">
+      <ion-text class="r14" style="font-size: 16px;">Total</ion-text>
+    </div>
+
+    <div>
+      <ion-text class="b16" style="color: #488EEB; font-family: 'Merriweather', serif; font-size: 20px;">
+        $45.05
+      </ion-text>
+    </div>
+  </div>
+   
+   <div style="margin-bottom: 15px; margin-left: 7px;">
+    <ion-text class="subtitle">Choose your payment method</ion-text>
+  </div>
+  <ion-button expand="block" fill="outline" style="
+    margin-top: -5px;
+    --border-color: var(--ion-color-input);
+    --border-radius: 12px;
+    height: 55px;
+    background-color: var(--ion-color-bg1);
+
+    width: 100%;
+    padding: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+">
+
+    <div style="
+        width: 85%;             
+        display: flex;
+        align-items: center;
+    ">
+      <div style="
+            width: 60px;
+            display: flex;
+            justify-content: center;
+            margin-left: 10px;  
+        ">
+        <img src='../../../../assets/image/a26.png' style="height: 40px; width: 50px;" />
       </div>
+      <div style="
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-left: 20px;   /* ← mueve solo el texto */
+        ">
+        <ion-text class="b16" style="color: var(--ion-color-txt);">
+          Crypto payment
+        </ion-text>
+      </div>
+
     </div>
-    <div class="icon" style="height: 36px;width: 36px;border-radius: 10px;background-color: var(--ion-color-bg1);">
-      <ion-icon name="close-circle-outline" style="font-size: 18px;" color="txt"></ion-icon>
+
+  </ion-button>
+
+   
+  <ion-button fill="outline" style="
+    margin-top: -15px;
+    --border-color: var(--ion-color-input);
+    --border-radius: 12px;
+    height: 55px;
+    background-color: var(--ion-color-bg1);
+
+    width: 100%;           
+    padding: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+
+    display: flex;
+    justify-content: center;    
+">
+
+    <div style="
+        width: 85%;            
+        display: flex;
+        align-items: center;
+    ">
+
+      <div style="
+            width: 60px;
+            display: flex;
+            justify-content: center;
+            margin-left: 10px; 
+        ">
+        <img src='../../../../assets/image/a27.png' style="height: 40px; width: 40px;" />
+      </div>
+
+      <div style="
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-start;
+            margin-left: 20px;
+        ">
+        <ion-text class="b16" style="color: var(--ion-color-txt);">
+          Cash Payment
+        </ion-text>
+      </div>
+
     </div>
-  </div>
 
-  <div style="margin-top: 30px;">
-    <ion-text class="subtitle">Order Summary</ion-text>
-  </div> 
+  </ion-button>
 
-  <div class="list1" style="margin-top: 20px;">
-    <ion-text class="r14" >Order Amount</ion-text>
-    <ion-text class="b16">$48.00</ion-text>
-  </div>
 
-  <div class="list1" style="margin-top: 20px;">
-    <ion-text class="r14" >Home Delivery</ion-text>
-    <ion-text class="b16">$5.00</ion-text>
-  </div>
+  <ion-button expand="block" fill="outline" style="
+    margin-top: 7px;
+    --border-color: var(--ion-color-input);
+    --border-radius: 12px;
+    height: 55px;
+    background-color: var(--ion-color-bg1);
 
-  <div class="list1" style="margin-top: 20px;">
-    <ion-text class="r14" >Cuppon Discount</ion-text>
-    <ion-text class="b16">-$7.95</ion-text>
-  </div>
+    width: 100%;
+    padding: 0;
+    --padding-start: 0;
+    --padding-end: 0;
 
-  <div class="lines" style="border-color: var(--ion-color-input);margin: 20px 0px;"></div>
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+">
 
-  <div class="list1" style="margin-top: 20px;">
-    <ion-text class="r14" >Total</ion-text>
-    <ion-text class="b16" style="color: var(--ion-color-primary);">$45.05</ion-text>
-  </div>
-  
+    <div style="
+        width: 85%;            
+        display: flex;
+        align-items: center;
+    ">
+      <div style="
+            width: 60px;
+            display: flex;
+            justify-content: center;
+            margin-left: 10px;    
+        ">
+        <img src='../../../../assets/image/a28.png' style="height: 40px; width: 40px;" />
+      </div>
+
+      <div style="
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-left: 20px;    
+        ">
+        <ion-text class="b16" style="color: var(--ion-color-txt);">
+          Payment by bank transfer
+        </ion-text>
+      </div>
+
+    </div>
+
+  </ion-button>
+
+
 </ion-content>
 
-<ion-footer [translucent]="false" style="box-shadow: none;background-color: #1E2027;">
-  <ion-toolbar color="bg" style="padding: 15px 5px;--border-width: 0 0;">
-    
-    <ion-button id="open-custom5" expand="block" style="margin-bottom: 5px;--background: var(--ion-color-txt);--color:var(--ion-color-bg)">Pay $45.05</ion-button>
+<ion-footer [translucent]="false" style="box-shadow: none;background-color: #121213;">
+    <ion-toolbar color="bg" style="padding: 15px 5px;--border-width: 0 0;">
+       
+        <ion-button id="open-custom5" expand="block"
+      style="margin-bottom: 5px;--background: var(--ion-color-txt);--color:var(--ion-color-bg)">Submit
+      request</ion-button>
 
-    <ion-modal id="example-modal" #modal trigger="open-custom5" style="box-shadow: none;background-color: #1E2027;">
-      <ng-template>
-        <div class="wrapper">
-  
+        <ion-modal id="example-modal" #modal trigger="open-custom5" style="box-shadow: none;background-color: #1E2027;">
+            <ng-template>
+                <div class="wrapper">
+
           <div class="column" style="align-items: center;">
-            <ion-img src="../../../../assets/icon/Logo.svg" style="height: 96px;width: 96px;" />
-          </div>
-  
-          <div class="ion-text-center" style="margin: 0 10px; margin-top: 10px;">
-            <ion-text class="subtitle" style="color: #FFFFFF">Your Parcel Successfully Shiped!</ion-text>
-          </div>
-  
-          <div (click)="close1()" class="btno list" style="justify-content: baseline;margin: 0 15px;margin-top: 20px;">
-            <ion-text class="b14" style="color: #ffffff;">478456147567846</ion-text>
-            <ion-icon name="copy-outline" style="font-size: 16px;color: #FFFFFF;margin-left: 10px;"></ion-icon>
-          </div>
+                        <ion-img src="../../../../assets/icon/Logo.svg" style="height: 96px;width: 96px;" />
+                      </div>
+           
+                    <div class="ion-text-center" style="margin: 0 10px; margin-top: 10px;">
+                        <ion-text class="subtitle" style="color: #FFFFFF">Your Parcel Successfully Shiped!</ion-text>
+                      </div>
+           
+                    <div (click)="close1()" class="btno list"
+            style="justify-content: baseline;margin: 0 15px;margin-top: 20px;">
+                        <ion-text class="b14" style="color: #ffffff;">478456147567846</ion-text>
+                        <ion-icon name="copy-outline"
+              style="font-size: 16px;color: #FFFFFF;margin-left: 10px;"></ion-icon>
+                      </div>
 
-          <ion-button (click)="close()" expand="block" style="margin-top: 15px;margin-bottom: 10px;--background:#ffffff;--color: #141312;">View Details</ion-button>
+                    <ion-button (click)="close()" expand="block"
+            style="margin-top: 15px;margin-bottom: 10px;--background:#ffffff;--color: #1E2027;">View
+            Details</ion-button>
+                 
         </div>
-      </ng-template>
-    </ion-modal>
-  
-  </ion-toolbar>
+              </ng-template>
+          </ion-modal>
+     
+      </ion-toolbar>
 </ion-footer>
