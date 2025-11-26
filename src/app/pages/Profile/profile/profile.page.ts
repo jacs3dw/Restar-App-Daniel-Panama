@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserSessionService, UserLogged } from '../../services/session/user-session.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,21 +10,23 @@ import { Component, OnInit } from '@angular/core';
 export class ProfilePage implements OnInit {
 
   darkMode = false;
+  user: UserLogged | null = null;
 
-  constructor() { }
-  
+  constructor(private userSession: UserSessionService) {}
+
   ngOnInit(): void {
     this.checkAppMode();
+    this.loadUser();
   }
 
   async checkAppMode() {
     const checkIsDarkMode = localStorage.getItem('darkModeActivated');
-    // const checkIsDarkMode = await Preferences.get({key: 'darkModeActivated'});
-    console.log(checkIsDarkMode);
-    checkIsDarkMode == 'true'
-      ? (this.darkMode = true)
-      : (this.darkMode = false);
+    this.darkMode = checkIsDarkMode === 'true';
     document.body.classList.toggle('dark', this.darkMode);
   }
-}
 
+  loadUser() {
+    this.user = this.userSession.getUser();
+    console.log("Usuario cargado en profile:", this.user);
+  }
+}

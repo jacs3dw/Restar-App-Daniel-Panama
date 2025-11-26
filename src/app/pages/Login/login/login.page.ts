@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { loginUser } from 'Api/services/auth/indexAuth';
-import { getAllEntities } from 'Api/services/entities/indexEntitis';
 import { getAllUsers } from 'Api/services/entities_manager/indexEntitiesManager';
 import { UserSessionService } from '../../services/session/user-session.service';
 
@@ -9,45 +8,41 @@ import { UserSessionService } from '../../services/session/user-session.service'
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  standalone:false,
+  standalone: false,
 })
 export class LoginPage implements OnInit {
 
   darkMode = false;
-  
+
+  email: string = '';
+  password: string = '';
+  showPassword: boolean = false;
 
   constructor(
     private router: Router,
     private userSession: UserSessionService
-  ) { }
-  
+  ) {}
+
   ngOnInit(): void {
     this.checkAppMode();
   }
 
   async checkAppMode() {
     const checkIsDarkMode = localStorage.getItem('darkModeActivated');
-    // const checkIsDarkMode = await Preferences.get({key: 'darkModeActivated'});
-    console.log(checkIsDarkMode);
-    checkIsDarkMode == 'true'
-      ? (this.darkMode = true)
-      : (this.darkMode = false);
+    this.darkMode = checkIsDarkMode === 'true';
     document.body.classList.toggle('dark', this.darkMode);
   }
-
-  email: string = '';
-  password: string = '';
-  showPassword: boolean = false;
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+
   async onCreateAccountClick() {
     try {
       const response = await getAllUsers();
       console.log('response:', response);
     } catch (error) {
-      console.error('Error al obtener las entidades:', error);
+      console.error('Error al obtener usuarios:', error);
     }
   }
 
@@ -59,26 +54,41 @@ export class LoginPage implements OnInit {
       }
 
       const resp = await loginUser({ email: this.email, password: this.password });
-      console.log('resp:', resp); 
+      console.log('resp login:', resp);
 
       if (resp.status) {
+
         const token = resp?.data?.token;
-        const user = resp?.data?.user;  
+        const user = resp?.data?.user;
+
         if (token) {
-          // 🔐 Guardar token en localStorage
           localStorage.setItem('authToken', token);
         }
+
         if (user) {
-          this.userSession.setUser(user); // 💾 Guardamos el usuario en el servicio de sesión
+          const mappedUser = {
+            id: user.id,
+            full_name: user.full_name || user.name || '',
+            phone: user.phone || '',
+            email: user.email || '',
+            country: user.country || '',
+            role_id: user.role_id || '',
+            role: user.role || null
+          };
+
+          console.log("Usuario mapeado:", mappedUser);
+
+          this.userSession.setUser(mappedUser);
         }
 
         this.router.navigate(['/intro']);
+
       } else {
         console.log('Error al iniciar sesión:', resp.message);
       }
+
     } catch (error) {
-      console.error('Error al iniciar sesión:', error);
+      console.error('Error en login:', error);
     }
   }
-
 }

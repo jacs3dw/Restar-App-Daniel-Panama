@@ -25,3 +25,19 @@ export const getAllUsers = async () => {
 
     return infoErrorApi(data, 'Error al obtener el usuario');
 };
+
+export const getAllProducts = async () => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/products/all`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
+
+    const { status, data } = respApi;
+
+    if (status) {
+        response.data = data.data;
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al obtener el usuario');
+};
