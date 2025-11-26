@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
         const user = resp?.data?.user;
 
         if (token) {
-          localStorage.setItem('authToken', token);
+          localStorage.setItem('token', token);
         }
 
         if (user) {

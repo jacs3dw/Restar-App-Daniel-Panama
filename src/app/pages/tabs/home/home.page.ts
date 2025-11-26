@@ -100,6 +100,8 @@ export class HomePage implements OnInit {
         description: 'Your package is on the way and will arrive very soon.',
       },
     ];
+      
+    this.shipments = [...this.allShipments];
   }
 
   goToCp4(event: Event) {
