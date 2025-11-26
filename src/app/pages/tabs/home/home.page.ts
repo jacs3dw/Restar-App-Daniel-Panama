@@ -75,8 +75,10 @@ export class HomePage implements OnInit {
     { label: 'DuckDuckGo', value: 'DuckDuckGo', focused: false },
   ];
 
-  loadShipments() {
+  async loadShipments() {
     //Realizar peticion backend
+    const data = await getAllProducts();
+  console.log("informacion de backent", data)
     this.allShipments = [
       {
         id: '1',
