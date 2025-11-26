@@ -23,17 +23,14 @@ export class UserSessionService {
   private _user: UserLogged | null = null;
 
   constructor() {
-    // Cargar desde localStorage si existe
-    const saved = localStorage.getItem('userData');
-    if (saved) {
-      this._user = JSON.parse(saved);
-    }
+    // Ya NO cargamos desde localStorage
+    // Solo vive en memoria mientras la app está abierta
   }
 
-  // Guardar usuario
   setUser(user: UserLogged) {
     this._user = user;
-    localStorage.setItem('userData', JSON.stringify(user));
+    // Ya NO:
+    // localStorage.setItem('userData', JSON.stringify(user));
   }
 
   getUser(): UserLogged | null {
@@ -46,6 +43,7 @@ export class UserSessionService {
 
   clearSession() {
     this._user = null;
-    localStorage.removeItem('userData');
+    // Puedes limpiar token aquí si quieres cerrar sesión
+    localStorage.removeItem('token');
   }
 }

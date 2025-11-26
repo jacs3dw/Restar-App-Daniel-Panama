@@ -41,3 +41,19 @@ export const getAllProducts = async () => {
 
     return infoErrorApi(data, 'Error al obtener el usuario');
 };
+
+export const getperfills = async () => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/users/profile`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
+
+    const { status, data } = respApi;
+
+    if (status) {
+        response.data = data.data;
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al obtener el usuario');
+};
