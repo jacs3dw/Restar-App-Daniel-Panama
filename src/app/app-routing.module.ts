@@ -111,10 +111,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/Chat/chat/chat.module').then( m => m.ChatPageModule)
   },
   {
-    path: 'orderdetails',
+    path: 'orderdetails/:id',
     loadComponent: () =>
       import('./pages/tabs/orderdetails/orderdetails.page').then(m => m.OrderdetailsPage)
-  },
+  },   
 ];
 
 

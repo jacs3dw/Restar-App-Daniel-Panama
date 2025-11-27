@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserSessionService } from '../../services/session/user-session.service';
-import { getAllProducts } from 'Api/services/entities_manager/indexEntitiesManager';
+import { actualizarCarrito, getAllProducts } from 'Api/services/entities_manager/indexEntitiesManager';
 
 interface ShipmentStop {
   icon: 'ellipse-outline' | 'location-outline';
@@ -49,9 +49,9 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadUserName();
     this.checkAppMode();
     this.loadShipments();
-    this.loadUserName();
   }
 
   async checkAppMode() {
@@ -76,45 +76,68 @@ export class HomePage implements OnInit {
   ];
 
   async loadShipments() {
-    //Realizar peticion backend
-    const data = await getAllProducts();
-  console.log("informacion de backent", data)
-    this.allShipments = [
-      {
-        id: '1',
-        status: 'Completed',
-        title: 'Package from Amsterdam to New York',
-        url: 'https://www.google.com/',
-        description: 'Your package is being processed and will be shipped soon.',
-      },
-      {
-        id: '2',
-        status: 'Pending',
-        title: 'Order delivered to Paris',
-        url: 'https://www.youtube.com/',
-        description: 'This shipment has been successfully delivered to the recipient.',
-      },
-      {
-        id: '3',
-        status: 'Pending',
-        title: 'Shipment en route to Lisbon',
-        url: 'https://www.bing.com/',
-        description: 'Your package is on the way and will arrive very soon.',
-      },
-    ];
-      
+    // Realizar petición al backend
+    const resp = await getAllProducts();
+    console.log('informacion de backend', resp);
+  
+    // Asumiendo que la respuesta tiene la forma: { status: true, data: [...] }
+    const backendData = resp?.data || [];
+  
+    this.allShipments = backendData.map((item: any, index: number) => ({
+      id: item.id || String(index + 1),       // usa el id real del backend
+      status: item.state || 'Activo',         // mapeamos state -> status
+      title: item.title,                      // título del producto
+      url: item.url,                          // url del producto
+      description: item.description,          // descripción del producto
+      // si más adelante quieres usar category, price, etc, los puedes agregar aquí
+      // categoryName: item.category?.name,
+      // price: item.price,
+    }));
+  
     this.shipments = [...this.allShipments];
   }
 
-  goToCp4(event: Event) {
+  async goToCp4(event: Event, shipment: Shipment) {
     event.stopPropagation();
-    this.router.navigateByUrl('/cp4');
+  
+    const user = this.userSession.getUser();
+  
+    if (!user) {
+      console.warn('No hay usuario en sesión, no se puede actualizar el carrito');
+      // si quieres, puedes redirigir al login o mostrar un toast
+      return;
+    }
+  
+    const body = {
+      users_id: user.id,
+      products_id: shipment.id,
+    };
+  
+    try {
+      const resp = await actualizarCarrito(body);
+      console.log('Respuesta actualizarCarrito:', resp);
+  
+      // Si quieres, podrías validar resp.status o resp.success aquí
+  
+      if (resp.status) {
+        // Si quieres, puedes mostrar un toast de éxito
+        console.log('Carrito actualizado correctamente');
+        this.router.navigateByUrl('/cp4');
+      } else {
+        console.error('Error al actualizar carrito:', resp.message);
+        // aquí podrías mostrar un toast de error
+      }
+    } catch (error) {
+      console.error('Error al actualizar carrito:', error);
+      // aquí podrías mostrar un toast de error
+    }
   }
+  
 
-  goToOrderDetails(event: Event) {
+  goToOrderDetails(event: Event, shipment: Shipment) {
     event.stopPropagation();
-    this.router.navigateByUrl('/orderdetails');
-  }
+    this.router.navigateByUrl(`/orderdetails/${shipment.id}`);
+  }  
 
   openShipmentUrl(event: Event, url: string) {
     event.stopPropagation();

@@ -57,3 +57,70 @@ export const getperfills = async () => {
 
     return infoErrorApi(data, 'Error al obtener el usuario');
 };
+
+export const updatePerfil = async (id: string, body: any) => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/users/update/${id}`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.patch(path, body);
+    console.log('respApi:', respApi);
+    const { status, data } = respApi;
+
+    if (status) {        
+        response.message = 'Inicio de sesión exitoso'; 
+        response.data = data.data;       
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al Iniciar Sesión');
+};
+
+
+export const actualizarCarrito = async (body: any) => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/shopping-cart/save`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.post(path, body);
+    console.log('respApi:', respApi);
+    const { status, data } = respApi;
+
+    if (status) {        
+        response.message = 'Inicio de sesión exitoso'; 
+        response.data = data.data;       
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al Iniciar Sesión');
+};
+
+export const getproducto = async (id: string) => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/products/${id}`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
+
+    const { status, data } = respApi;
+
+    if (status) {
+        response.data = data.data;
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al obtener el usuario');
+};
+
+export const getCarrito = async () => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/shopping-cart/user-logged`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
+
+    const { status, data } = respApi;
+
+    if (status) {
+        response.data = data.data;
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al obtener el usuario');
+};

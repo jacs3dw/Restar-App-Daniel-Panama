@@ -68,13 +68,13 @@
   </div>
   
   <div
-    class="box shadow"
-    *ngFor="let shipment of shipments; let last = last"
-    [style.margin-top.px]="15"
-    [style.margin-bottom.px]="last ? 80 : 0"
-    style="background-color: var(--ion-color-bg1); border-radius: 12px; padding: 16px;"
-    (click)="goToOrderDetails($event)"
-  >
+  class="box shadow"
+  *ngFor="let shipment of shipments; let last = last"
+  [style.margin-top.px]="15"
+  [style.margin-bottom.px]="last ? 80 : 0"
+  style="background-color: var(--ion-color-bg1); border-radius: 12px; padding: 16px;"
+  (click)="goToOrderDetails($event, shipment)"
+>
     <div class="list" style="align-items: flex-start; margin-bottom: 12px;">
       <div style="flex: 1;">
         <!-- Fila con "Title:" + icono a la derecha -->
@@ -124,7 +124,7 @@
                 height: 28px;
                 font-size: 11px;
               "
-              (click)="goToCp4($event)"
+              (click)="goToCp4($event, shipment)"
             >
               I want to delete
             </ion-button>

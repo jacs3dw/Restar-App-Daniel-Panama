@@ -1,6 +1,5 @@
 <ion-header [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-bg);">
   <ion-toolbar color="bg" style="padding: 0 15px;padding-top: 8px;--border-width: 0;">
-    
     <ion-buttons slot="start">
       <ion-back-button
         defaultHref="/tabs/home"
@@ -16,45 +15,49 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true" style="padding: 0 20px;background-color: var(--ion-color-bg);">
-  
-  <!-- Imagen dinámica -->
-  <img
-  [src]="orderDetails?.imageUrl"
-  style="
-    display: block;
-    width: 90%;
-    border-radius: 12px;
-    margin: 20px auto 0;
-  "
-/>
 
+  <!-- Puedes mostrar un loader si quieres -->
+  <ion-spinner *ngIf="loading" name="crescent" style="display:block; margin: 30px auto;"></ion-spinner>
 
-  <!-- Título dinámico -->
-  <ion-text class="b16" style="display: block;margin-top: 20px;color: #fff; width: 90%; margin: 20px auto 0;">
-    {{ orderDetails?.title }}
-  </ion-text>
+  <ng-container *ngIf="!loading && orderDetails">
 
-  <!-- Link dinámico -->
-  <ion-text class="r14" style="display: block;margin-top: 6px;color: var(--ion-color-primary); width: 90%; margin: 20px auto 0;">
-    Link: {{ orderDetails?.link }}
-  </ion-text>
+    <!-- Imagen dinámica -->
+    <img
+      [src]="orderDetails.imageUrl"
+      style="
+        display: block;
+        width: 90%;
+        border-radius: 12px;
+        margin: 20px auto 0;
+      "
+    />
 
-  <!-- Descripción dinámica -->
-  <ion-text class="r14" style="display: block;margin-top: 15px;color: var(--ion-color-txt);line-height: 22px; width: 90%; margin: 20px auto 0;">
-    {{ orderDetails?.description }}
-  </ion-text>
+    <!-- Título dinámico -->
+    <ion-text class="b16" style="display: block;margin-top: 20px;color: #fff; width: 90%; margin: 20px auto 0;">
+      {{ orderDetails.title }}
+    </ion-text>
 
-  <div style="margin-top: 60px;margin-bottom: 40px;">
-    <ion-button
-      expand="block"
-      shape="round"
-      (click)="goBack()"
-      style="--background: #fff;--color:#000;"
-    >
-      Go back
-    </ion-button>
-  </div>
+    <!-- Link dinámico -->
+    <ion-text class="r14" style="display: block;margin-top: 6px;color: var(--ion-color-primary); width: 90%; margin: 20px auto 0;">
+      Link: {{ orderDetails.link }}
+    </ion-text>
 
+    <!-- Descripción dinámica -->
+    <ion-text class="r14" style="display: block;margin-top: 15px;color: var(--ion-color-txt);line-height: 22px; width: 90%; margin: 20px auto 0;">
+      {{ orderDetails.description }}
+    </ion-text>
+
+    <div style="margin-top: 60px;margin-bottom: 40px;">
+      <ion-button
+        expand="block"
+        shape="round"
+        (click)="goBack()"
+        style="--background: #fff;--color:#000;"
+      >
+        Go back
+      </ion-button>
+    </div>
+
+  </ng-container>
 </ion-content>

@@ -19,42 +19,61 @@
   </div>
 
   <!-- NAME -->
-  <div class="list" style="margin-top: 30px;">
-    <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Name</ion-text>
-    <div class="input" style="flex: 1;">
-      <ion-input [value]="user?.full_name" style="flex: 1;"></ion-input>
-    </div>
+<div class="list" style="margin-top: 30px;">
+  <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Name</ion-text>
+  <div class="input" style="flex: 1;">
+    <ion-input
+      [(ngModel)]="formUser.full_name"
+      name="full_name"
+      style="flex: 1;">
+    </ion-input>
   </div>
+</div>
 
-  <!-- PHONE -->
-  <div class="list" style="margin-top: 20px;">
-    <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Phone</ion-text>
-    <div class="input" style="flex: 1;">
-      <ion-input [value]="user?.phone" style="flex: 1;"></ion-input>
-    </div>
+<!-- PHONE -->
+<div class="list" style="margin-top: 20px;">
+  <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Phone</ion-text>
+  <div class="input" style="flex: 1;">
+    <ion-input
+      [(ngModel)]="formUser.phone"
+      name="phone"
+      style="flex: 1;">
+    </ion-input>
   </div>
+</div>
 
-  <!-- EMAIL -->
-  <div class="list" style="margin-top: 20px;">
-    <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Email</ion-text>
-    <div class="input" style="flex: 1;">
-      <ion-input [value]="user?.email" style="flex: 1;"></ion-input>
-    </div>
+<!-- EMAIL -->
+<div class="list" style="margin-top: 20px;">
+  <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Email</ion-text>
+  <div class="input" style="flex: 1;">
+    <ion-input
+      [(ngModel)]="formUser.email"
+      name="email"
+      style="flex: 1;">
+    </ion-input>
   </div>
+</div>
 
-  <!-- COUNTRY -->
-  <div class="list" style="margin-top: 20px;">
-    <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Country</ion-text>
-    <div class="input" style="flex: 1;">
-      <ion-input [value]="user?.country" style="flex: 1;"></ion-input>
-    </div>
+<!-- COUNTRY -->
+<div class="list" style="margin-top: 20px;">
+  <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Country</ion-text>
+  <div class="input" style="flex: 1;">
+    <ion-input
+      [(ngModel)]="formUser.country"
+      name="country"
+      style="flex: 1;">
+    </ion-input>
   </div>
+</div>
 
 </ion-content>
 
 <ion-footer [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-bg);">
   <ion-toolbar color="bg" style="padding: 15px 5px;--border-width: 0 0;">
-    <ion-button routerLink="/tabs/home" expand="block" style="margin-bottom: 5px;--background: var(--ion-color-txt);--color:var(--ion-color-bg)">
+    <ion-button
+      expand="block"
+      (click)="onSubmitChanges()"
+      style="margin-bottom: 5px;--background: var(--ion-color-txt);--color:var(--ion-color-bg)">
       Submit Changes
     </ion-button>
   </ion-toolbar>

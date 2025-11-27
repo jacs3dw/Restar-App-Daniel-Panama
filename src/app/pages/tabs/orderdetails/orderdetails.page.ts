@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { getproducto } from 'Api/services/entities_manager/indexEntitiesManager';
+// Y los tipos de tu ResponseApp si los necesitas
+// import { ResponseApp } from 'ruta/del/tipo';
 
 interface OrderDetail {
-  id: number;
+  id: string;
   imageUrl: string;
   title: string;
   link: string;
@@ -21,42 +24,51 @@ interface OrderDetail {
 })
 export class OrderdetailsPage implements OnInit {
 
-  // Simulamos el backend con un array
-  private mockOrders: OrderDetail[] = [
-    {
-      id: 1,
-      imageUrl: '../../../../assets/image/Foto.png',
-      title: 'Horem ipsum dolor sit amet, consectetur adipiscing elit.',
-      link: 'https://dominio.com/jddlsdfdd...',
-      description: `Rorem ipsum dolor sit amet, consectetur adipiscing elit.  
-Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-Rorem ipsum dolor sit amet, consectetur adipiscing elit.  
-Nunc vulputate libero et velit interdum, ac aliquet odio mattis.`,
-    },
-    {
-      id: 2,
-      imageUrl: '../../../../assets/image/Foto.png',
-      title: 'Otro pedido con datos distintos',
-      link: 'https://dominio.com/otro-pedido',
-      description: `Descripción del segundo pedido simulada desde el array.`,
-    },
-  ];
-
-  // El objeto que usa la vista
   orderDetails: OrderDetail | null = null;
+  loading = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit() {
-    // Aquí simulas que “llamas al backend” para traer el pedido 1
-    this.loadOrderDetails(1);
+  async ngOnInit() {
+    // Leer el id de la URL: /orderdetails/:id
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (!id) {
+      // Si no hay id, regresamos o mostramos error
+      this.goBack();
+      return;
+    }
+
+    await this.loadOrderDetails(id);
   }
 
-  // Función que simula la llamada al backend
-  loadOrderDetails(id: number) {
-    // aquí podrías meter setTimeout para simular delay si quieres
-    const found = this.mockOrders.find((o) => o.id === id) || null;
-    this.orderDetails = found;
+  private async loadOrderDetails(id: string) {
+    try {
+      this.loading = true;
+
+      const resp = await getproducto(id);
+      // resp.data es el objeto que mostraste en el ejemplo
+      const product = resp.data;
+
+      // Mapeamos lo que viene del backend al modelo que usa la vista
+      this.orderDetails = {
+        id: product.id,
+        imageUrl: product.image,    // <- del backend: image
+        title: product.title,       // <- del backend: title
+        link: product.url,          // <- del backend: url
+        description: product.description, // <- del backend: description
+      };
+
+    } catch (error) {
+      console.error('Error al cargar el producto', error);
+      // si quieres, puedes mostrar un toast o navegar de vuelta
+      this.goBack();
+    } finally {
+      this.loading = false;
+    }
   }
 
   goBack() {

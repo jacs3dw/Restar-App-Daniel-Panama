@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserSessionService, UserLogged } from '../../services/session/user-session.service';
+import { updatePerfil } from 'Api/services/entities_manager/indexEntitiesManager';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +14,26 @@ export class ProfilePage implements OnInit {
   darkMode = false;
   user: UserLogged | null = null;
 
-  constructor(private userSession: UserSessionService) {}
+  // 👇 Modelo editable para el formulario
+  formUser: {
+    full_name: string;
+    phone: string;
+    email: string;
+    country: string;
+    role_id: string;
+  } = {
+    full_name: '',
+    phone: '',
+    email: '',
+    country: '',
+    role_id: ''
+  };
+
+  constructor(
+    private userSession: UserSessionService,
+    private router: Router,
+
+  ) {}
 
   ngOnInit(): void {
     this.checkAppMode();
@@ -28,5 +49,56 @@ export class ProfilePage implements OnInit {
   loadUser() {
     this.user = this.userSession.getUser();
     console.log("Usuario cargado en profile:", this.user);
+
+    if (this.user) {
+      this.formUser = {
+        full_name: this.user.full_name || '',
+        phone: this.user.phone || '',
+        email: this.user.email || '',
+        country: this.user.country || '',
+        role_id: this.user.role_id || ''
+      };
+    }
   }
+
+  // 👇 Función para enviar cambios al backend
+  async onSubmitChanges() {
+    if (!this.user?.id) {
+      console.error('No hay ID de usuario para actualizar.');
+      return;
+    }
+  
+    try {
+      const body = {
+        full_name: this.formUser.full_name,
+        phone: this.formUser.phone,
+        email: this.formUser.email,
+        country: this.formUser.country,
+        role_id: this.formUser.role_id,
+      };
+  
+      const resp = await updatePerfil(this.user.id, body);
+      console.log('Respuesta updatePerfil:', resp);
+  
+      if (resp.status) {
+        const updatedUser: UserLogged = {
+          ...this.user,
+          ...body,
+        };
+  
+        // 🔹 Aquí actualizas la info en el servicio ANTES de navegar
+        this.userSession.setUser(updatedUser);
+        this.user = updatedUser;
+  
+        console.log('Perfil actualizado correctamente');
+  
+        this.router.navigate(['/tabs/home']);
+      } else {
+        console.error('Error al actualizar perfil:', resp.message);
+      }
+    } catch (error) {
+      console.error('Error inesperado al actualizar perfil:', error);
+    }
+  }
+  
 }
