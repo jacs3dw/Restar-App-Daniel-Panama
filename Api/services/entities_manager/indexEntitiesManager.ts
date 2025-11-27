@@ -58,6 +58,22 @@ export const getperfills = async () => {
     return infoErrorApi(data, 'Error al obtener el usuario');
 };
 
+export const getAllorders = async () => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/order-management/by-user`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
+    const { status, data } = respApi;
+
+    if (status) {
+        response.data = data.data; // <- Todas las órdenes del usuario
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al obtener las órdenes');
+};
+
+
 export const updatePerfil = async (id: string, body: any) => {
     const response: ResponseApp = structuredClone(responseApi.responseApp);
     const path = `/users/update/${id}`;
