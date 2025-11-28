@@ -5,7 +5,7 @@ import { infoErrorApi, responseApi } from "src/utils/responseApi";
 
 /**
  * Obtener el entity manager por el Id
- *  @param {{
+ *  @param {
  *      id: string
  * }}
  * @returns {Promise<{ data: any, message: string, status: boolean }>} - Respuesta estándar con estructura personalizada.
@@ -139,4 +139,23 @@ export const getCarrito = async () => {
     }
 
     return infoErrorApi(data, 'Error al obtener el usuario');
+
+    
+};
+
+export const removeCarrito = async (id: string) => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/shopping-cart/delete/${id}`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.remove(path);
+
+    const { status, data } = respApi;
+
+    if (status) {
+        response.message = 'Producto eliminado del carrito';
+        response.data = data.data;
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al eliminar el producto del carrito');
 };

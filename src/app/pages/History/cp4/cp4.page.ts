@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { getCarrito } from 'Api/services/entities_manager/indexEntitiesManager';
+import { getCarrito, removeCarrito } from 'Api/services/entities_manager/indexEntitiesManager';
 
 interface ShippingOption {
   id: string;
-  name: string;           // Fast Delivery Services, USB Express Ltd., etc.
-  price: number;          // 48.00, 64.00, etc. (si ya no lo usas, luego lo quitamos)
-  hasTracking: boolean;   // true/false
-  isRecommended?: boolean; // para saber cuál usar en el botón
-  url: string;            // 🔹 nueva propiedad
+  name: string;
+  price: number;
+  hasTracking: boolean;
+  isRecommended?: boolean;
+  url: string;
 }
 
 @Component({
@@ -20,14 +20,14 @@ export class Cp4Page implements OnInit {
 
   darkMode = false;
 
-  // Lista que viene ahora del backend
   shippingOptions: ShippingOption[] = [];
+  totalCarrito: number = 0;
 
-  constructor() { }
-  
+  constructor() {}
+
   ngOnInit(): void {
     this.checkAppMode();
-    this.loadShippingOptions(); // carga inicial desde el backend
+    this.loadShippingOptions();
   }
 
   async checkAppMode() {
@@ -36,35 +36,59 @@ export class Cp4Page implements OnInit {
     document.body.classList.toggle('dark', this.darkMode);
   }
 
-  // 🔹 AHORA usa getCarrito en lugar de mock
   async loadShippingOptions() {
     try {
-      const resp = await getCarrito();   // llama a la API
+      const resp = await getCarrito();
 
       if (resp.status && Array.isArray(resp.data)) {
         this.shippingOptions = resp.data.map((item: any, index: number) => {
           const product = item.product || {};
 
           return {
-            id: item.id,                                      // id del carrito
-            name: product.title || 'Producto sin título',     // título del producto
-            price: Number(product.price || 0),                // precio numérico
-            hasTracking: true,                                // por ahora fijo
-            isRecommended: index === 0,                       // el primero como recomendado
-            url: product.url || '',                           // url del producto
+            id: item.id,
+            name: product.title || 'Producto sin título',
+            price: Number(product.price || 0),
+            hasTracking: true,
+            isRecommended: index === 0,
+            url: product.url || ''
           } as ShippingOption;
         });
+
+        this.totalCarrito = this.shippingOptions.reduce((sum, item) => sum + item.price, 0);
+
+        localStorage.setItem("orderAmount", this.totalCarrito.toString());
+
       } else {
         this.shippingOptions = [];
+        this.totalCarrito = 0;
       }
 
     } catch (error) {
       console.error('Error al cargar el carrito:', error);
       this.shippingOptions = [];
+      this.totalCarrito = 0;
     }
   }
 
-  // 🔹 Opción recomendada (para el texto del botón)
+  // 🔹 MÉTODO QUE AGREGO EXACTAMENTE COMO ME PEDISTE
+  async removeItem(optionId: string) {
+    try {
+      const resp = await removeCarrito(optionId);
+
+      if (resp.status) {
+        // Quitar visualmente el producto
+        this.shippingOptions = this.shippingOptions.filter(item => item.id !== optionId);
+
+        // Recalcular total
+        this.totalCarrito = this.shippingOptions.reduce((sum, item) => sum + item.price, 0);
+
+        localStorage.setItem("orderAmount", this.totalCarrito.toString());
+      }
+    } catch (error) {
+      console.error("Error eliminando producto:", error);
+    }
+  }
+
   get recommendedOption(): ShippingOption | undefined {
     return this.shippingOptions.find(o => o.isRecommended) || this.shippingOptions[0];
   }

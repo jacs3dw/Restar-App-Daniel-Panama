@@ -72,8 +72,9 @@
         </div> -->
       </div>
 
-      <div
+   <div
   class="icon"
+  (click)="removeItem(option.id)"
   style="
     padding: 1px 10px;
     border-radius: 6px;
@@ -84,12 +85,15 @@
     justify-content: center;
     white-space: nowrap;
     height: auto;
+    cursor: pointer;
   "
 >
   <ion-text style="color: #000000; font-size: 9px; white-space: nowrap;">
     Do not buy
   </ion-text>
 </div>
+
+
 
 
     </div>

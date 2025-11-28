@@ -13,5 +13,13 @@ ion-modal#example-modal {
     background-color: #488EEB;
   }
 
-  
+  .payment-selected {
+  border: 2px solid #488EEB !important;
+  background-color: #0b1736 !important; /* fondo azul oscuro */
+}
+
+.payment-selected ion-text {
+  color: #488EEB !important; /* texto azul */
+}
+
   

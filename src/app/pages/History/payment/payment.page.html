@@ -31,9 +31,9 @@
       <ion-text class="r14" style="font-size: 16px;">Order Amount</ion-text>
     </div>
 
-    <div>
+      <div>
       <ion-text class="b16" style="font-size: 20px; font-family: 'Merriweather', serif;">
-        $48.00
+        {{ orderAmount | currency:'USD' }}
       </ion-text>
     </div>
   </div>
@@ -48,9 +48,9 @@
       <ion-text class="r14" style="font-size: 16px;">Home Delivery</ion-text>
     </div>
 
-    <div>
+     <div>
       <ion-text class="b16" style="font-size: 20px; font-family: 'Merriweather', serif;">
-        $5.00
+        {{ deliveryFee | currency:'USD' }}
       </ion-text>
     </div>
   </div>
@@ -69,9 +69,9 @@
       <ion-text class="r14" style="font-size: 16px;">Total</ion-text>
     </div>
 
-    <div>
+      <div>
       <ion-text class="b16" style="color: #488EEB; font-family: 'Merriweather', serif; font-size: 20px;">
-        $45.05
+        {{ totalFinal | currency:'USD' }}
       </ion-text>
     </div>
   </div>
@@ -79,22 +79,11 @@
    <div style="margin-bottom: 15px; margin-left: 7px;">
     <ion-text class="subtitle">Choose your payment method</ion-text>
   </div>
-  <ion-button expand="block" fill="outline" style="
-    margin-top: -5px;
-    --border-color: var(--ion-color-input);
-    --border-radius: 12px;
-    height: 55px;
-    background-color: var(--ion-color-bg1);
+  <ion-button expand="block" fill="outline"
+  [ngClass]="{ 'payment-selected': selectedPaymentMethod === 'crypto' }"
+  (click)="selectPaymentMethod('crypto')"
+  style="margin-top: -5px; --border-color: var(--ion-color-input); --border-radius: 12px; height: 55px; background-color: var(--ion-color-bg1); width: 100%; padding: 0; --padding-start: 0; --padding-end: 0; display: flex; justify-content: center; align-items: center;">
 
-    width: 100%;
-    padding: 0;
-    --padding-start: 0;
-    --padding-end: 0;
-
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-">
 
     <div style="
         width: 85%;             
@@ -126,21 +115,11 @@
   </ion-button>
 
    
-  <ion-button fill="outline" style="
-    margin-top: -15px;
-    --border-color: var(--ion-color-input);
-    --border-radius: 12px;
-    height: 55px;
-    background-color: var(--ion-color-bg1);
+  <ion-button fill="outline"
+  [ngClass]="{ 'payment-selected': selectedPaymentMethod === 'cash' }"
+  (click)="selectPaymentMethod('cash')"
+  style="margin-top: -15px; --border-color: var(--ion-color-input); --border-radius: 12px; height: 55px; background-color: var(--ion-color-bg1); width: 100%; padding: 0; --padding-start: 0; --padding-end: 0; display: flex; justify-content: center;">
 
-    width: 100%;           
-    padding: 0;
-    --padding-start: 0;
-    --padding-end: 0;
-
-    display: flex;
-    justify-content: center;    
-">
 
     <div style="
         width: 85%;            
@@ -173,22 +152,11 @@
   </ion-button>
 
 
-  <ion-button expand="block" fill="outline" style="
-    margin-top: 7px;
-    --border-color: var(--ion-color-input);
-    --border-radius: 12px;
-    height: 55px;
-    background-color: var(--ion-color-bg1);
+ <ion-button expand="block" fill="outline"
+  [ngClass]="{ 'payment-selected': selectedPaymentMethod === 'bank' }"
+  (click)="selectPaymentMethod('bank')"
+  style="margin-top: 7px; --border-color: var(--ion-color-input); --border-radius: 12px; height: 55px; background-color: var(--ion-color-bg1); width: 100%; padding: 0; --padding-start: 0; --padding-end: 0; display: flex; justify-content: center; align-items: center;">
 
-    width: 100%;
-    padding: 0;
-    --padding-start: 0;
-    --padding-end: 0;
-
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-">
 
     <div style="
         width: 85%;            
@@ -227,8 +195,11 @@
     <ion-toolbar color="bg" style="padding: 15px 5px;--border-width: 0 0;">
        
         <ion-button id="open-custom5" expand="block"
-      style="margin-bottom: 5px;--background: var(--ion-color-txt);--color:var(--ion-color-bg)">Submit
-      request</ion-button>
+  (click)="submitPayment()"
+  style="margin-bottom: 5px;--background: var(--ion-color-txt);--color:var(--ion-color-bg)">
+  Submit request
+</ion-button>
+
 
         <ion-modal id="example-modal" #modal trigger="open-custom5" style="box-shadow: none;background-color: #1E2027;">
             <ng-template>

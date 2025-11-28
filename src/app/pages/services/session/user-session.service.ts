@@ -22,15 +22,10 @@ export class UserSessionService {
 
   private _user: UserLogged | null = null;
 
-  constructor() {
-    // Ya NO cargamos desde localStorage
-    // Solo vive en memoria mientras la app está abierta
-  }
+  constructor() {}
 
   setUser(user: UserLogged) {
     this._user = user;
-    // Ya NO:
-    // localStorage.setItem('userData', JSON.stringify(user));
   }
 
   getUser(): UserLogged | null {
@@ -41,9 +36,13 @@ export class UserSessionService {
     return this._user?.full_name ?? '';
   }
 
+  // 🔥🔥🔥 ÚNICO MÉTODO NUEVO — NO AFECTA NADA DEL CARRITO
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
   clearSession() {
     this._user = null;
-    // Puedes limpiar token aquí si quieres cerrar sesión
     localStorage.removeItem('token');
   }
 }
