@@ -94,3 +94,31 @@ ion-tabs {
   .tabbar-gap {
     width: 100px; /* Espacio para la esfera */
   }
+
+  .fab-content {
+    display: flex;        /* ⬅️ Alinea icono + texto en fila */
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;             /* espacio entre icono y texto */
+  }
+  
+  .fab-icon img {
+    width: 50px;
+    height: 50px;
+    transition: 0.2s;
+  }
+  
+  .fab-label {
+    color: #b1b1b1;
+    font-size: 14px;
+    transition: 0.2s;
+  }
+  
+  .fab-content.active .fab-label {
+    color: var(--ion-color-primary);
+  }
+  
+  .fab-content.active img {
+    filter: brightness(1.3);
+  }
+  

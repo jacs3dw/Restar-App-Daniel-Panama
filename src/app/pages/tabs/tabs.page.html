@@ -2,18 +2,22 @@
 
   <!-- FAB central -->
   <ion-fab
-    vertical="bottom"
-    horizontal="center"
-    translucent="true"
-    class="custom-fab"
-  >
-    <ion-tab-button tab="history">
-      <div class="fab-icon">
-        <img src="../../../assets/icon/Logo.svg" alt="Logo" />
-      </div>
+  vertical="bottom"
+  horizontal="center"
+  translucent="true"
+  class="custom-fab"
+  (click)="selectStatus()"
+>
+  <div class="fab-content" [class.active]="selectTab === 'history'">
+    <div class="fab-icon">
+      <img src="../../../assets/icon/Logo.svg" alt="Logo" />
+    </div>
+
+    <span class="fab-label">
       Status
-    </ion-tab-button>
-  </ion-fab>
+    </span>
+  </div>
+</ion-fab>
 
   <!-- Contenedor del tab bar -->
   <div class="custom-tabbar-wrapper">

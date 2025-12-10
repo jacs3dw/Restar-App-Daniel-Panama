@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserSessionService, UserLogged } from '../../services/session/user-session.service';
 import { updatePerfil } from 'Api/services/entities_manager/indexEntitiesManager';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-profile',
@@ -32,7 +34,8 @@ export class ProfilePage implements OnInit {
   constructor(
     private userSession: UserSessionService,
     private router: Router,
-  ) {}
+    private alertController: AlertController
+  ) {}  
 
   ngOnInit(): void {
     this.checkAppMode();
@@ -70,6 +73,38 @@ export class ProfilePage implements OnInit {
       ? this.formUser.full_name.charAt(0).toUpperCase()
       : '?';
   }
+
+  logout() {
+    // this.userSession.setUser(null);
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    this.router.navigate(['/login'], { replaceUrl: true });
+  }
+  
+  async confirmLogout() {
+    const alert = await this.alertController.create({
+      header: 'Cerrar sesión',
+      message: '¿Estás seguro que deseas cerrar tu sesión?',
+      cssClass: 'logout-alert',
+  
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Salir',
+          role: 'confirm',
+          handler: () => {
+            this.logout();
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
+  }
+  
 
   async onSubmitChanges() {
     if (!this.user?.id) {

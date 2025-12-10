@@ -31,6 +31,11 @@ export class TabsPage implements OnInit {
       : (this.darkMode = false);
     document.body.classList.toggle('dark', this.darkMode);
   }
+
+  selectStatus() {
+    this.router.navigate(['/tabs/history']);
+    this.selectTab = 'history'; // activa efecto visual
+  }  
  
   setCurrentTab() {
     this.selectTab = this.tabs.getSelected();
