@@ -11,60 +11,66 @@
 
 <ion-content [fullscreen]="true" class="ion-padding" color="bg">
 
-  <div class="list" style="justify-content: center;">
-    <ion-img src="../../../../assets/image/d5.png" style="height: 104px;width: 104px;"></ion-img>
-    <div style="position: absolute;left: 53%;margin-top: 72px;">
-      <ion-img src="../../../../assets/image/d6.png" style="height: 24px;width: 24px;"></ion-img>
+  <div class="list" style="justify-content: center; position: relative; margin-top: 10px;">
+
+  <!-- 🔵 CÍRCULO CON LA INICIAL EN VEZ DE LA FOTO -->
+  <div class="avatar-circle">
+    <span>{{ initial }}</span>
+  </div>
+
+  <!-- Icono pequeño eliminado -->
+
+</div>
+
+
+  <!-- NAME -->
+  <div class="list" style="margin-top: 30px;">
+    <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Name</ion-text>
+    <div class="input" style="flex: 1;">
+      <ion-input
+        [(ngModel)]="formUser.full_name"
+        name="full_name"
+        (ionChange)="updateInitial()"
+        style="flex: 1;">
+      </ion-input>
     </div>
   </div>
 
-  <!-- NAME -->
-<div class="list" style="margin-top: 30px;">
-  <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Name</ion-text>
-  <div class="input" style="flex: 1;">
-    <ion-input
-      [(ngModel)]="formUser.full_name"
-      name="full_name"
-      style="flex: 1;">
-    </ion-input>
+  <!-- PHONE -->
+  <div class="list" style="margin-top: 20px;">
+    <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Phone</ion-text>
+    <div class="input" style="flex: 1;">
+      <ion-input
+        [(ngModel)]="formUser.phone"
+        name="phone"
+        style="flex: 1;">
+      </ion-input>
+    </div>
   </div>
-</div>
 
-<!-- PHONE -->
-<div class="list" style="margin-top: 20px;">
-  <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Phone</ion-text>
-  <div class="input" style="flex: 1;">
-    <ion-input
-      [(ngModel)]="formUser.phone"
-      name="phone"
-      style="flex: 1;">
-    </ion-input>
+  <!-- EMAIL -->
+  <div class="list" style="margin-top: 20px;">
+    <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Email</ion-text>
+    <div class="input" style="flex: 1;">
+      <ion-input
+        [(ngModel)]="formUser.email"
+        name="email"
+        style="flex: 1;">
+      </ion-input>
+    </div>
   </div>
-</div>
 
-<!-- EMAIL -->
-<div class="list" style="margin-top: 20px;">
-  <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Email</ion-text>
-  <div class="input" style="flex: 1;">
-    <ion-input
-      [(ngModel)]="formUser.email"
-      name="email"
-      style="flex: 1;">
-    </ion-input>
+  <!-- COUNTRY -->
+  <div class="list" style="margin-top: 20px;">
+    <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Country</ion-text>
+    <div class="input" style="flex: 1;">
+      <ion-input
+        [(ngModel)]="formUser.country"
+        name="country"
+        style="flex: 1;">
+      </ion-input>
+    </div>
   </div>
-</div>
-
-<!-- COUNTRY -->
-<div class="list" style="margin-top: 20px;">
-  <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Country</ion-text>
-  <div class="input" style="flex: 1;">
-    <ion-input
-      [(ngModel)]="formUser.country"
-      name="country"
-      style="flex: 1;">
-    </ion-input>
-  </div>
-</div>
 
 </ion-content>
 

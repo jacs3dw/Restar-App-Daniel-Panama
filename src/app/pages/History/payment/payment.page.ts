@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController, IonModal } from '@ionic/angular';
 import { UserSessionService } from '../../services/session/user-session.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -12,6 +12,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class PaymentPage implements OnInit {
 
+  @ViewChild('modal', { static: false }) modal!: IonModal;
+
   darkMode = false;
 
   orderAmount: number = 0;
@@ -20,11 +22,18 @@ export class PaymentPage implements OnInit {
 
   selectedPaymentMethod: string | null = null;
 
+  orderId: string = "";
+
+  showPaymentAlert: boolean = false;
+
   constructor(
     private modalcontroller: ModalController,
     public router: Router,
     private userSession: UserSessionService,
-    private http: HttpClient
+    private http: HttpClient,
+    private alertController: AlertController,
+
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -34,22 +43,17 @@ export class PaymentPage implements OnInit {
 
   loadOrderValues() {
     const amount = Number(localStorage.getItem("orderAmount"));
-
     this.orderAmount = isNaN(amount) ? 0 : amount;
     this.totalFinal = this.orderAmount + this.deliveryFee;
-
-    console.log("OrderAmount:", this.orderAmount);
-    console.log("DeliveryFee:", this.deliveryFee);
-    console.log("TotalFinal:", this.totalFinal);
   }
 
   close() {
-    this.modalcontroller.dismiss();
+    try { this.modal?.dismiss(); } catch {}
     this.router.navigate(['/trackorder']);
   }
 
   close1() {
-    this.modalcontroller.dismiss();
+    try { this.modal?.dismiss(); } catch {}
     this.router.navigate(['/tabs/home']);
   }
 
@@ -61,17 +65,18 @@ export class PaymentPage implements OnInit {
 
   selectPaymentMethod(method: string) {
     this.selectedPaymentMethod = method;
-    console.log("Método de pago seleccionado:", method);
   }
 
-  // 🔥🔥🔥 SOLUCIÓN: Enviar token + body
-  submitPayment() {
+  async openPaymentAlert() {}
+
+  async submitPayment() {
+
     if (!this.selectedPaymentMethod) {
-      console.log("Debes seleccionar un método de pago");
+      this.showPaymentAlert = true;
       return;
     }
 
-    const token = this.userSession.getToken(); // 🔥 RECUPERAR TOKEN
+    const token = this.userSession.getToken();
 
     if (!token) {
       console.error("No hay token guardado. Debes iniciar sesión.");
@@ -88,16 +93,32 @@ export class PaymentPage implements OnInit {
       Authorization: `Bearer ${token}`
     });
 
-    this.http.post(url, body, { headers })
-      .subscribe({
-        next: (resp) => {
-          console.log("Orden creada correctamente:", resp);
-          this.router.navigate(['/trackorder']);
-        },
-        error: (err) => {
-          console.error("Error creando la orden:", err);
+    this.http.post(url, body, { headers }).subscribe({
+      next: async (resp: any) => {
+
+        console.log("RESPUESTA COMPLETA:", resp);
+
+        // ← ESTE ES EL ÚNICO CAMBIO REAL PARA QUE FUNCIONE
+        this.orderId = resp?.data?.id ?? "";
+        console.log("ID recibido de la API:", this.orderId);
+
+        this.cdr.detectChanges();
+
+        try {
+          await this.modal.present();
+        } catch (err) {
+          console.error('No se pudo presentar el modal:', err);
         }
-      });
+      },
+      error: (err) => {
+        console.error("Error creando la orden:", err);
+      }
+    });
   }
+
+  goHome() {
+  this.router.navigate(['/tabs/home']);
+}
+
 
 }

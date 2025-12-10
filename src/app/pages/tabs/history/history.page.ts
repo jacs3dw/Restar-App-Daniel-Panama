@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { getAllorders, } from 'Api/services/entities_manager/indexEntitiesManager';
 
 interface Delivery {
@@ -7,6 +8,7 @@ interface Delivery {
   title: string;
   url: string;
   description: string;
+  id?: string;
 }
 
 @Component({
@@ -27,7 +29,9 @@ export class HistoryPage implements OnInit {
 
   deliveries: Delivery[] = [];
 
-  constructor() {}
+  constructor(
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.checkAppMode();
@@ -59,6 +63,7 @@ export class HistoryPage implements OnInit {
 
           // 🔥 colores
           statusColor: isCompleted ? "#3AC479" : "#2196F3",
+          id: order.product?.id || "",
 
           // 🔥 datos reales del producto
           title: order.product?.title || "Sin título",
@@ -92,6 +97,7 @@ export class HistoryPage implements OnInit {
 
   goToTrackOrder(delivery: Delivery) {
     console.log("Go to track:", delivery);
+    this.router.navigateByUrl('/trackorder/' + delivery.id);
   }
 
   onDeleteDelivery(event: Event, delivery: Delivery) {

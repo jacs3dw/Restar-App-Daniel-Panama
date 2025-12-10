@@ -20,8 +20,10 @@ interface Shipment {
   title: string;
   url: string;
   description: string;
-}
 
+
+  categoryName: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -35,10 +37,8 @@ export class HomePage implements OnInit {
   darkMode = false;
 
   shipments: Shipment[] = [];
-
   allShipments: Shipment[] = [];
   selectedFilter: string = 'ALL';
-
   searchText: string = '';
 
   userName: string = '';
@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
   constructor(
     private router: Router,
     private userSession: UserSessionService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadUserName();
@@ -56,9 +56,7 @@ export class HomePage implements OnInit {
 
   async checkAppMode() {
     const checkIsDarkMode = localStorage.getItem('darkModeActivated');
-    checkIsDarkMode == 'true'
-      ? (this.darkMode = true)
-      : (this.darkMode = false);
+    this.darkMode = checkIsDarkMode === 'true';
     document.body.classList.toggle('dark', this.darkMode);
   }
 
@@ -76,68 +74,57 @@ export class HomePage implements OnInit {
   ];
 
   async loadShipments() {
-    // Realizar petición al backend
     const resp = await getAllProducts();
     console.log('informacion de backend', resp);
-  
-    // Asumiendo que la respuesta tiene la forma: { status: true, data: [...] }
+
     const backendData = resp?.data || [];
-  
+
     this.allShipments = backendData.map((item: any, index: number) => ({
-      id: item.id || String(index + 1),       // usa el id real del backend
-      status: item.state || 'Activo',         // mapeamos state -> status
-      title: item.title,                      // título del producto
-      url: item.url,                          // url del producto
-      description: item.description,          // descripción del producto
-      // si más adelante quieres usar category, price, etc, los puedes agregar aquí
-      // categoryName: item.category?.name,
-      // price: item.price,
+      id: item.id || String(index + 1),
+      status: item.state || 'Activo',
+      title: item.title,
+      url: item.url,
+      description: item.description,
+
+      
+      categoryName: item.category?.name || ''
     }));
-  
+
     this.shipments = [...this.allShipments];
   }
 
   async goToCp4(event: Event, shipment: Shipment) {
     event.stopPropagation();
-  
+
     const user = this.userSession.getUser();
-  
     if (!user) {
-      console.warn('No hay usuario en sesión, no se puede actualizar el carrito');
-      // si quieres, puedes redirigir al login o mostrar un toast
+      console.warn('No hay usuario en sesión');
       return;
     }
-  
+
     const body = {
       users_id: user.id,
       products_id: shipment.id,
     };
-  
+
     try {
       const resp = await actualizarCarrito(body);
       console.log('Respuesta actualizarCarrito:', resp);
-  
-      // Si quieres, podrías validar resp.status o resp.success aquí
-  
+
       if (resp.status) {
-        // Si quieres, puedes mostrar un toast de éxito
-        console.log('Carrito actualizado correctamente');
         this.router.navigateByUrl('/cp4');
       } else {
         console.error('Error al actualizar carrito:', resp.message);
-        // aquí podrías mostrar un toast de error
       }
     } catch (error) {
       console.error('Error al actualizar carrito:', error);
-      // aquí podrías mostrar un toast de error
     }
   }
-  
 
   goToOrderDetails(event: Event, shipment: Shipment) {
     event.stopPropagation();
     this.router.navigateByUrl(`/orderdetails/${shipment.id}`);
-  }  
+  }
 
   openShipmentUrl(event: Event, url: string) {
     event.stopPropagation();
@@ -162,16 +149,17 @@ export class HomePage implements OnInit {
   }
 
   applyFilter() {
-
     let filtered = [...this.allShipments];
 
+    
     if (this.selectedFilter !== 'ALL') {
       const filterWord = this.selectedFilter.toLowerCase();
       filtered = filtered.filter(s =>
-        s.url.toLowerCase().includes(filterWord)
+        s.categoryName.toLowerCase().includes(filterWord)
       );
     }
 
+    
     if (this.searchText.trim() !== '') {
       const text = this.searchText.toLowerCase();
       filtered = filtered.filter(s =>

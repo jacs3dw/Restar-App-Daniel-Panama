@@ -4,3 +4,26 @@
 .bgd{
     background: url(../../../../assets/image/s5d.png)no-repeat center center/cover;
 }
+
+/* Punto azul (estado actual) */
+.status-dot.current {
+    background-color: #2196F3; /* Azul */
+}
+
+/* Punto gris (pendiente) */
+.status-dot.pending {
+    background-color: #9E9E9E; /* Gris */
+}
+
+/* Punto verde (completado) */
+.status-dot.done {
+    background-color: #4CAF50; /* Verde */
+}
+
+/* estilo base del puntito */
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}

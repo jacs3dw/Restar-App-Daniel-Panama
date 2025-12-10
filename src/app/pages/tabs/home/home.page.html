@@ -1,8 +1,26 @@
 <ion-header [translucent]="false" style="box-shadow: none;background-color: var(--ion-color-bg);">
   <ion-toolbar color="bg" style="padding: 0 15px;padding-top: 20px;--border-width: 0;">
-    <ion-buttons slot="start">
-      <ion-img src="../../../../assets/image/s1.png" style="height:56px;width:56px;" />
-    </ion-buttons>
+<ion-buttons slot="start">
+  <div
+    style="
+      height: 56px;
+      width: 56px;
+      border-radius: 50%;
+      background-color: #4285F4; /* MISMO COLOR DEL PROFILE */
+      color: #ffffff;            /* Letra blanca como en el profile */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 26px;
+      font-weight: bold;
+      text-transform: uppercase;
+    "
+  >
+    {{ userName?.charAt(0) }}
+  </div>
+</ion-buttons>
+
+
     <div style="margin-left: 15px;flex: 1;">
       <ion-text class="r14" style="color: var(--ion-color-dis);">
         Hello {{ userName || 'User' }},
@@ -11,11 +29,14 @@
         <ion-text class="subtitle" >Welcome Back!</ion-text>
       </div>
     </div>
+
     <ion-buttons slot="end" routerLink="/notify">
       <ion-img [src]="darkMode?'../../../../assets/image/s2.png':'../../../../assets/image/s2.png'"
         style="height: 24px;width: 24px;" />
     </ion-buttons>
+
   </ion-toolbar>
+
   <div class="list" style="margin: 10px 15px;">
     <div class="input2" style="flex: 1;">
       <ion-icon name="search"/>
@@ -26,10 +47,10 @@
         [(ngModel)]="searchText"
         (input)="onSearchChange()"
       />
-
     </div>
   </div>
 </ion-header>
+
 
 <div class="scroll list" style="padding: 8px 15px; background-color: #141312;">
   <div *ngFor="let item of items; let i = index;" (click)="onFocus(i)" [ngStyle]="{'background-color': item.focused ? 'var(--ion-color-txt)' : 'var(--ion-color-search)',

@@ -7,14 +7,14 @@ import { Router } from '@angular/router';
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
-  standalone:false,
+  standalone: false,
 })
 export class ProfilePage implements OnInit {
 
   darkMode = false;
   user: UserLogged | null = null;
 
-  // 👇 Modelo editable para el formulario
+  initial: string = ''; 
   formUser: {
     full_name: string;
     phone: string;
@@ -32,7 +32,6 @@ export class ProfilePage implements OnInit {
   constructor(
     private userSession: UserSessionService,
     private router: Router,
-
   ) {}
 
   ngOnInit(): void {
@@ -58,16 +57,26 @@ export class ProfilePage implements OnInit {
         country: this.user.country || '',
         role_id: this.user.role_id || ''
       };
+
+      this.initial = this.formUser.full_name
+        ? this.formUser.full_name.charAt(0).toUpperCase()
+        : '?';
     }
   }
 
-  // 👇 Función para enviar cambios al backend
+  
+  updateInitial() {
+    this.initial = this.formUser.full_name
+      ? this.formUser.full_name.charAt(0).toUpperCase()
+      : '?';
+  }
+
   async onSubmitChanges() {
     if (!this.user?.id) {
       console.error('No hay ID de usuario para actualizar.');
       return;
     }
-  
+
     try {
       const body = {
         full_name: this.formUser.full_name,
@@ -76,22 +85,24 @@ export class ProfilePage implements OnInit {
         country: this.formUser.country,
         role_id: this.formUser.role_id,
       };
-  
+
       const resp = await updatePerfil(this.user.id, body);
       console.log('Respuesta updatePerfil:', resp);
-  
+
       if (resp.status) {
         const updatedUser: UserLogged = {
           ...this.user,
           ...body,
         };
-  
-        // 🔹 Aquí actualizas la info en el servicio ANTES de navegar
+
         this.userSession.setUser(updatedUser);
         this.user = updatedUser;
-  
+
+      
+        this.initial = body.full_name.charAt(0).toUpperCase();
+
         console.log('Perfil actualizado correctamente');
-  
+
         this.router.navigate(['/tabs/home']);
       } else {
         console.error('Error al actualizar perfil:', resp.message);
@@ -100,5 +111,5 @@ export class ProfilePage implements OnInit {
       console.error('Error inesperado al actualizar perfil:', error);
     }
   }
-  
+
 }

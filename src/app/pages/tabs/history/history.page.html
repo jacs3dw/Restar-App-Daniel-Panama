@@ -35,7 +35,6 @@
   <!-- 🔹 LISTA DINÁMICA de DELIVERIES con el mismo diseño de SHIPMENTS -->
   <div
     class="box shadow"
-    routerLink="/trackorder"
     *ngFor="let delivery of filteredDeliveries; let last = last"
     [style.margin-top.px]="15"
     [style.margin-bottom.px]="last ? 80 : 0"

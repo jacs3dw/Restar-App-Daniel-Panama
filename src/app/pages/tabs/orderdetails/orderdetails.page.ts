@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { getproducto } from 'Api/services/entities_manager/indexEntitiesManager';
-// Y los tipos de tu ResponseApp si los necesitas
-// import { ResponseApp } from 'ruta/del/tipo';
 
 interface OrderDetail {
   id: string;
@@ -33,11 +31,9 @@ export class OrderdetailsPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    // Leer el id de la URL: /orderdetails/:id
     const id = this.route.snapshot.paramMap.get('id');
 
     if (!id) {
-      // Si no hay id, regresamos o mostramos error
       this.goBack();
       return;
     }
@@ -50,21 +46,18 @@ export class OrderdetailsPage implements OnInit {
       this.loading = true;
 
       const resp = await getproducto(id);
-      // resp.data es el objeto que mostraste en el ejemplo
       const product = resp.data;
 
-      // Mapeamos lo que viene del backend al modelo que usa la vista
       this.orderDetails = {
         id: product.id,
-        imageUrl: product.image,    // <- del backend: image
-        title: product.title,       // <- del backend: title
-        link: product.url,          // <- del backend: url
-        description: product.description, // <- del backend: description
+        imageUrl: product.image,
+        title: product.title,
+        link: product.url,
+        description: product.description,
       };
 
     } catch (error) {
       console.error('Error al cargar el producto', error);
-      // si quieres, puedes mostrar un toast o navegar de vuelta
       this.goBack();
     } finally {
       this.loading = false;
@@ -73,5 +66,14 @@ export class OrderdetailsPage implements OnInit {
 
   goBack() {
     this.router.navigateByUrl('/tabs/home');
+  }
+
+  // 🟩 AGREGADO — ENVIAR EL OBJETO REAL A TRACKORDER
+  goToTrackOrder() {
+    if (!this.orderDetails) return;
+
+    this.router.navigate(['/trackorder'], {
+      state: { order: this.orderDetails }
+    });
   }
 }

@@ -83,7 +83,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/History/snc2/snc2.module').then( m => m.Snc2PageModule)
   },
   {
-    path: 'trackorder',
+    path: 'trackorder/:id',
     loadChildren: () => import('./pages/History/trackorder/trackorder.module').then( m => m.TrackorderPageModule)
   },
   {
