@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserSessionService } from '../../services/session/user-session.service';
-import { actualizarCarrito, getAllProducts } from 'Api/services/entities_manager/indexEntitiesManager';
+import { actualizarCarrito, getAllProducts, getHomeProducts } from 'Api/services/entities_manager/indexEntitiesManager';
+
 
 interface ShipmentStop {
   icon: 'ellipse-outline' | 'location-outline';
@@ -74,24 +75,23 @@ export class HomePage implements OnInit {
   ];
 
   async loadShipments() {
-    const resp = await getAllProducts();
-    console.log('informacion de backend', resp);
+  const resp = await getHomeProducts();
+  console.log('Productos HOME (Initial):', resp);
 
-    const backendData = resp?.data || [];
+  const backendData = resp?.data || [];
 
-    this.allShipments = backendData.map((item: any, index: number) => ({
-      id: item.id || String(index + 1),
-      status: item.state || 'Activo',
-      title: item.title,
-      url: item.url,
-      description: item.description,
+  this.allShipments = backendData.map((item: any, index: number) => ({
+    id: item.id || String(index + 1),
+    status: item.state, // Initial
+    title: item.title,
+    url: item.url,
+    description: item.description,
+    categoryName: item.category?.name || ''
+  }));
 
-      
-      categoryName: item.category?.name || ''
-    }));
+  this.shipments = [...this.allShipments];
+}
 
-    this.shipments = [...this.allShipments];
-  }
 
   async goToCp4(event: Event, shipment: Shipment) {
     event.stopPropagation();

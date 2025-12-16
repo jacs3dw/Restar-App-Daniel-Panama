@@ -44,66 +44,65 @@
 
 
     <!-- 🔸 Fila "Title:" + icono según estado + título + botón "I want to delete" -->
-    <div class="list" style="align-items: flex-start; margin-top: 8px;">
-      <div style="flex: 1;">
-        <!-- Línea "Title:" con icono a la derecha -->
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <ion-text
-            class="b16"
-            style="color: rgba(110, 110, 110, 0.60); display: block; margin-bottom: 4px;"
-          >
-            Title:
-          </ion-text>
+<div class="list" style="align-items: flex-start; margin-top: 8px;">
+  <div style="flex: 1;">
+    <!-- Línea "Title:" con icono a la derecha -->
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <ion-text
+        class="b16"
+        style="color: rgba(110, 110, 110, 0.60); display: block; margin-bottom: 4px;"
+      >
+        Title:
+      </ion-text>
 
-          <!-- Si está Pending, mostrar warning.svg, si no check verde -->
-          <img
-            *ngIf="delivery.status === 'Pending'; else okIcon"
-            src="../../../../assets/icon/warning.svg"
-            alt="Warning"
-            style="width: 16px; height: 16px;"
-          />
-          <ng-template #okIcon>
-            <ion-icon
-              name="checkmark-circle"
-              style="font-size: 16px; color: #4CAF50;"
-            ></ion-icon>
-          </ng-template>
-        </div>
+      <!-- Si está Pending, mostrar warning.svg, si no check verde, si es Cancelado icono alerta -->
+      <img
+        *ngIf="delivery.status === 'Pending'; else okIcon"
+        src="../../../../assets/icon/warning.svg"
+        alt="Warning"
+        style="width: 16px; height: 16px;"
+      />
+      <ng-template #okIcon>
+        <ion-icon
+          *ngIf="delivery.status === 'Completed'"
+          name="checkmark-circle"
+          style="font-size: 16px; color: #4CAF50;"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="delivery.status === 'Cancelled'"
+          name="close-circle"
+          style="font-size: 16px; color: #FF5722;"
+        ></ion-icon>
+      </ng-template>
+    </div>
 
-        <!-- Título + botón "I want to delete" + línea inferior -->
+    <!-- Título + botón "I want to delete" + línea inferior -->
+    <div
+      style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 4px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.3);"
+    >
+      <!-- Título dinámico -->
+      <ion-text class="b16" style="color: var(--ion-color-txt); flex: 1;">
+        {{ delivery.title }}
+      </ion-text>
+
+      <!-- Botón 'I want to delete' -->
+      <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+        <!-- Chip de estado con color dinámico -->
         <div
-          style="
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            margin-top: 4px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-          "
+          class="chip1"
+          [ngStyle]="{
+            'background-color': delivery.statusColor || 'var(--ion-color-primary)'
+          }"
         >
-          <!-- Título dinámico -->
-          <ion-text class="b16" style="color: var(--ion-color-txt); flex: 1;">
-            {{ delivery.title }}
+          <ion-text class="r10" style="color: #fff;">
+            {{ delivery.status }}
           </ion-text>
-
-          <!-- Botón 'I want to delete' -->
-          <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
-            <!-- Chip de estado con color dinámico -->
-            <div
-              class="chip1"
-              [ngStyle]="{
-                'background-color': delivery.statusColor || 'var(--ion-color-primary)'
-              }"
-            >
-              <ion-text class="r10" style="color: #fff;">
-                {{ delivery.status }}
-              </ion-text>
-            </div>
-          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
 
     <!-- 🔸 URL + descripción -->
     <div>

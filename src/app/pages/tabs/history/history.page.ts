@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getAllorders, } from 'Api/services/entities_manager/indexEntitiesManager';
+import { getStatusProducts } from 'Api/services/entities_manager/indexEntitiesManager';
+
 
 interface Delivery {
   status: string;
@@ -44,38 +46,46 @@ export class HistoryPage implements OnInit {
     document.body.classList.toggle('dark', this.darkMode);
   }
 
-  async loadDeliveries() {
-    try {
-      const resp: any = await getAllorders();
-      console.log("ORDENES:", resp);
+ async loadDeliveries() {
+  try {
+    const resp: any = await getStatusProducts();
+    console.log("PRODUCTOS (NO Initial):", resp);
 
-      if (!resp?.data?.length) {
-        this.deliveries = [];
-        return;
+    if (!resp?.data?.length) {
+      this.deliveries = [];
+      return;
+    }
+
+    this.deliveries = resp.data.map((product: any) => {
+      let status = "Pending";
+      let statusColor = "#2196F3";
+      const isCompleted = product.state === "Completed";
+      const isCancelled = product.state === "Cancelled";
+
+      if (isCompleted) {
+        status = "Completed";
+        statusColor = "#3AC479"; // Verde para completado
+      } else if (isCancelled) {
+        status = "Cancelled";
+        statusColor = "#FF5722"; // Naranja para cancelado
       }
 
-      this.deliveries = resp.data.map((order: any) => {
-        const isCompleted = order.state === "Completed";
+      return {
+        status: status,
+        statusColor: statusColor,
+        id: product.id,
+        title: product.title || "Sin título",
+        url: product.url || "",
+        description: product.description || "Sin descripción",
+      };
+    });
 
-        return {
-          // 🔥 mapeo estado
-          status: isCompleted ? "Completed" : "Pending",
-
-          // 🔥 colores
-          statusColor: isCompleted ? "#3AC479" : "#2196F3",
-          id: order.product?.id || "",
-
-          // 🔥 datos reales del producto
-          title: order.product?.title || "Sin título",
-          url: order.product?.url || "",
-          description: order.product?.description || "Sin descripción",
-        };
-      });
-
-    } catch (error) {
-      console.error("❌ Error al cargar órdenes:", error);
-    }
+  } catch (error) {
+    console.error("❌ Error al cargar history:", error);
   }
+}
+
+
 
   // filtros UI
   onFocus(index: number) {

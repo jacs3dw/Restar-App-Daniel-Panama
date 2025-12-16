@@ -5,17 +5,12 @@ import { infoErrorApi, responseApi } from "src/utils/responseApi";
 
 /**
  * Obtener el entity manager por el Id
- *  @param {
- *      id: string
- * }}
- * @returns {Promise<{ data: any, message: string, status: boolean }>} - Respuesta estándar con estructura personalizada.
  */
 export const getAllUsers = async () => {
     const response: ResponseApp = structuredClone(responseApi.responseApp);
     const path = `/users/all`;
 
     const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
-
     const { status, data } = respApi;
 
     if (status) {
@@ -31,7 +26,6 @@ export const getAllProducts = async () => {
     const path = `/products/all`;
 
     const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
-
     const { status, data } = respApi;
 
     if (status) {
@@ -42,12 +36,48 @@ export const getAllProducts = async () => {
     return infoErrorApi(data, 'Error al obtener el usuario');
 };
 
+/**
+ * 🔥 Productos para el Home (solo estado Initial)
+ */
+export const getHomeProducts = async () => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/products/home-products`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
+    const { status, data } = respApi;
+
+    if (status) {
+        response.data = data.data;
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al obtener productos del home');
+};
+
+/**
+ * 🔥 NUEVO SERVICIO
+ * Productos con estado DIFERENTE de Initial (History)
+ */
+export const getStatusProducts = async () => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/products/status-products`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
+    const { status, data } = respApi;
+
+    if (status) {
+        response.data = data.data;
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al obtener productos por estado');
+};
+
 export const getperfills = async () => {
     const response: ResponseApp = structuredClone(responseApi.responseApp);
     const path = `/users/profile`;
 
     const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
-
     const { status, data } = respApi;
 
     if (status) {
@@ -66,13 +96,12 @@ export const getAllorders = async () => {
     const { status, data } = respApi;
 
     if (status) {
-        response.data = data.data; // <- Todas las órdenes del usuario
+        response.data = data.data;
         return response;
     }
 
     return infoErrorApi(data, 'Error al obtener las órdenes');
 };
-
 
 export const updatePerfil = async (id: string, body: any) => {
     const response: ResponseApp = structuredClone(responseApi.responseApp);
@@ -90,7 +119,6 @@ export const updatePerfil = async (id: string, body: any) => {
 
     return infoErrorApi(data, 'Error al Iniciar Sesión');
 };
-
 
 export const actualizarCarrito = async (body: any) => {
     const response: ResponseApp = structuredClone(responseApi.responseApp);
@@ -114,7 +142,6 @@ export const getproducto = async (id: string) => {
     const path = `/products/${id}`;
 
     const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
-
     const { status, data } = respApi;
 
     if (status) {
@@ -130,7 +157,6 @@ export const getCarrito = async () => {
     const path = `/shopping-cart/user-logged`;
 
     const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
-
     const { status, data } = respApi;
 
     if (status) {
@@ -139,8 +165,6 @@ export const getCarrito = async () => {
     }
 
     return infoErrorApi(data, 'Error al obtener el usuario');
-
-    
 };
 
 export const removeCarrito = async (id: string) => {
@@ -148,7 +172,6 @@ export const removeCarrito = async (id: string) => {
     const path = `/shopping-cart/delete/${id}`;
 
     const respApi: ResponseApi = await fetchApiAuthenticated.remove(path);
-
     const { status, data } = respApi;
 
     if (status) {
