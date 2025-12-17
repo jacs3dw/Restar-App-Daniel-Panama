@@ -12,6 +12,21 @@ import { AlertController } from '@ionic/angular';
   standalone: false,
 })
 export class ProfilePage implements OnInit {
+async showErrorModal(message: string) {
+  const alert = await this.alertController.create({
+    header: 'Error',
+    message: message || 'Ocurrió un error inesperado',
+    buttons: [
+      {
+        text: 'Aceptar',
+        role: 'confirm',
+      }
+    ],
+    backdropDismiss: false
+  });
+
+  await alert.present();
+}
 
   darkMode = false;
   user: UserLogged | null = null;
@@ -107,44 +122,46 @@ export class ProfilePage implements OnInit {
   
 
   async onSubmitChanges() {
-    if (!this.user?.id) {
-      console.error('No hay ID de usuario para actualizar.');
+  if (!this.user?.id) {
+    await this.showErrorModal('No se pudo identificar al usuario');
+    return;
+  }
+
+  try {
+    const body = {
+      full_name: this.formUser.full_name,
+      phone: this.formUser.phone,
+      email: this.formUser.email,
+      country: this.formUser.country,
+      role_id: this.formUser.role_id,
+    };
+
+    const resp = await updatePerfil(this.user.id, body);
+    console.log('Respuesta updatePerfil:', resp);
+
+    if (!resp?.status) {
+      await this.showErrorModal(resp?.message || 'Error al actualizar el perfil');
       return;
     }
 
-    try {
-      const body = {
-        full_name: this.formUser.full_name,
-        phone: this.formUser.phone,
-        email: this.formUser.email,
-        country: this.formUser.country,
-        role_id: this.formUser.role_id,
-      };
+    // ✅ Éxito
+    const updatedUser: UserLogged = {
+      ...this.user,
+      ...body,
+    };
 
-      const resp = await updatePerfil(this.user.id, body);
-      console.log('Respuesta updatePerfil:', resp);
+    this.userSession.setUser(updatedUser);
+    this.user = updatedUser;
 
-      if (resp.status) {
-        const updatedUser: UserLogged = {
-          ...this.user,
-          ...body,
-        };
+    this.initial = body.full_name.charAt(0).toUpperCase();
 
-        this.userSession.setUser(updatedUser);
-        this.user = updatedUser;
+    this.router.navigate(['/tabs/home']);
 
-      
-        this.initial = body.full_name.charAt(0).toUpperCase();
-
-        console.log('Perfil actualizado correctamente');
-
-        this.router.navigate(['/tabs/home']);
-      } else {
-        console.error('Error al actualizar perfil:', resp.message);
-      }
-    } catch (error) {
-      console.error('Error inesperado al actualizar perfil:', error);
-    }
+  } catch (error) {
+    console.error('Error inesperado al actualizar perfil:', error);
+    await this.showErrorModal('Error de conexión con el servidor');
   }
+}
+
 
 }

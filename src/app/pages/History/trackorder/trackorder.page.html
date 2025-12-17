@@ -47,16 +47,27 @@
 
     <!-- Link dinámico -->
     <ion-text
-      class="r14"
-      style="
-        display: block;
-        margin-top: 6px;
-        color: var(--ion-color-primary);
-        word-break: break-all;
-      "
-    >
-      Link: {{ orderDetails?.link }}
-    </ion-text>
+  class="r14"
+  style="
+    display: block;
+    margin-top: 6px;
+    word-break: break-all;
+  "
+>
+  Link:
+  <a
+    [href]="orderDetails?.link"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="
+      color: var(--ion-color-primary);
+      text-decoration: underline;
+    "
+  >
+    {{ orderDetails?.link }}
+  </a>
+</ion-text>
+
 
     <!-- Descripción dinámica -->
     <ion-text

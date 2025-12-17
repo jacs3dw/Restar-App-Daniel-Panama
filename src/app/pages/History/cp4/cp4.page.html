@@ -22,23 +22,28 @@
       <div class="list">
         <div style="flex: 1;">
           <!-- Nombre en blanco arriba -->
-          <ion-text class="b16" style="color: #FFFFFF;">
+          <ion-text class="b16" style="color: #FFFFFF; margin-bottom: 7px; font-size: 15px;">
             {{ option.name }}
           </ion-text>
   
           <!-- URL abajo en azul tipo enlace -->
           <div style="margin-top: 4px;">
             <ion-text
-              class="r10"
-              style="
-                color: #488EEB;
-                text-decoration: underline;
-                cursor: pointer;
-                white-space: nowrap;
-              "
-            >
-              {{ option.url }}
-            </ion-text>
+  class="r10"
+  style="
+    color: #488EEB;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 12px;
+    display: block;
+    max-width: 100%;
+    white-space: normal;
+    word-break: break-all;
+  "
+>
+  {{ option.url }}
+</ion-text>
+
           </div>
         </div>
       </div>
@@ -76,6 +81,8 @@
   class="icon"
   (click)="removeItem(option.id)"
   style="
+  min-width: 100px;
+  min-height: 25px;
     padding: 1px 10px;
     border-radius: 6px;
     background-color: #ffffff;
@@ -88,7 +95,7 @@
     cursor: pointer;
   "
 >
-  <ion-text style="color: #000000; font-size: 9px; white-space: nowrap;">
+  <ion-text style="color: #000000; font-size: 12px; white-space: nowrap;">
     Do not buy
   </ion-text>
 </div>
@@ -103,12 +110,9 @@
   <ion-button
     routerLink="/payment"
     expand="block"
-    style="margin: 20px 0;margin-top: 40px;--background: var(--ion-color-txt);--color: var(--ion-color-bg);"
+    style="margin-top: 40px;--background: var(--ion-color-txt);--color: var(--ion-color-bg); padding: 0px;"
   >
-    Continue with
-    <ng-container *ngIf="recommendedOption">
-      &nbsp;{{ recommendedOption.name }}
-    </ng-container>
+    Continue with the order
   </ion-button>
 
   <div routerLink="/tabs/home" class="btno" style="margin-bottom: 15px;">

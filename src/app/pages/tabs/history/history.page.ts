@@ -39,6 +39,11 @@ export class HistoryPage implements OnInit {
     this.checkAppMode();
     this.loadDeliveries();
   }
+  ionViewWillEnter() {
+    console.log('HomePage entra en vista → recargando datos');
+    this.checkAppMode();
+    this.loadDeliveries();
+  }
 
   async checkAppMode() {
     const checkIsDarkMode = localStorage.getItem('darkModeActivated');

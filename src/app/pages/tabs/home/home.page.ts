@@ -55,6 +55,13 @@ export class HomePage implements OnInit {
     this.loadShipments();
   }
 
+  ionViewWillEnter() {
+    console.log('HomePage entra en vista → recargando datos');
+    this.loadUserName();
+    this.checkAppMode();
+    this.loadShipments();
+  }
+
   async checkAppMode() {
     const checkIsDarkMode = localStorage.getItem('darkModeActivated');
     this.darkMode = checkIsDarkMode === 'true';

@@ -31,9 +31,7 @@
   <div class="list" style="margin-top: 20px;">
     <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Password</ion-text>
     <div class="input" style="flex: 1; position: relative;">
-      <ion-item class="input" style="flex:1;" color="bg">
-        <ion-input type="{{ showPassword ? 'text' : 'password' }}" [(ngModel)]="password" placeholder="" style="margin-left: 0;"></ion-input>
-      </ion-item>
+        <ion-input type="{{ showPassword ? 'text' : 'password' }}" [(ngModel)]="password" placeholder="" style="margin-left: 0px;"></ion-input>
       <ion-icon name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end" (click)="togglePasswordVisibility()" 
                 style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10;"></ion-icon>
     </div>

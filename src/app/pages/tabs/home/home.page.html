@@ -105,18 +105,11 @@
           </ion-text>
   
           <img
-            *ngIf="shipment.status === 'Pending'; else okIcon"
             src="../../../../assets/icon/warning.svg"
             alt="Warning"
-            style="width: 20px; height: 20px;"
+            style="width: 15px; height: 15px;"
           />
   
-          <ng-template #okIcon>
-            <ion-icon
-              name="checkmark-circle"
-              style="font-size: 20px; color: #4CAF50;"
-            ></ion-icon>
-          </ng-template>
         </div>
   
         <div

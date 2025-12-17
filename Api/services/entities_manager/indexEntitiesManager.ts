@@ -197,3 +197,20 @@ export const removeCarrito = async (id: string) => {
 
     return infoErrorApi(data, 'Error al eliminar el producto del carrito');
 };
+
+export const pagarCompra = async (body: any) => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/order-management/save-by-user`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.post(path, body);
+    console.log('respApi:', respApi);
+    const { status, data } = respApi;
+
+    if (status) {        
+        response.message = 'Inicio de sesión exitoso'; 
+        response.data = data.data;       
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al Iniciar Sesión');
+};
