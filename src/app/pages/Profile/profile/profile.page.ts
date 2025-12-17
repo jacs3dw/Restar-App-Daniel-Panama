@@ -3,6 +3,7 @@ import { UserSessionService, UserLogged } from '../../services/session/user-sess
 import { updatePerfil } from 'Api/services/entities_manager/indexEntitiesManager';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { UserLoaderService } from 'Api/services/auth/user-loader.service';
 
 
 @Component({
@@ -49,7 +50,9 @@ async showErrorModal(message: string) {
   constructor(
     private userSession: UserSessionService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private userLoader: UserLoaderService,
+
   ) {}  
 
   ngOnInit(): void {
@@ -144,18 +147,18 @@ async showErrorModal(message: string) {
       return;
     }
 
-    // ✅ Éxito
-    const updatedUser: UserLogged = {
-      ...this.user,
-      ...body,
-    };
+    // ✅ vuelve a pedir el perfil actualizado al backend
+    await this.userLoader.loadUserFromToken();
 
-    this.userSession.setUser(updatedUser);
-    this.user = updatedUser;
+    // vuelve a leer el usuario desde sesión
+    this.user = this.userSession.getUser();
 
-    this.initial = body.full_name.charAt(0).toUpperCase();
+    if (this.user?.full_name) {
+      this.initial = this.user.full_name.charAt(0).toUpperCase();
+    }
 
     this.router.navigate(['/tabs/home']);
+
 
   } catch (error) {
     console.error('Error inesperado al actualizar perfil:', error);

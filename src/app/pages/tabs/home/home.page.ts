@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserSessionService } from '../../services/session/user-session.service';
 import { actualizarCarrito, getAllProducts, getHomeProducts } from 'Api/services/entities_manager/indexEntitiesManager';
+import { initUser } from 'src/app/app.module';
+import { UserLoaderService } from 'Api/services/auth/user-loader.service';
 
 
 interface ShipmentStop {
