@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { getAllorders } from 'Api/services/entities_manager/indexEntitiesManager';
+import { getAllorders, IdProducts } from 'Api/services/entities_manager/indexEntitiesManager';
 
 type TrackingStatus = 'done' | 'current' | 'pending';
 
@@ -59,18 +59,17 @@ export class TrackorderPage implements OnInit {
 
   async loadOrderInfo(orderId: string) {
     try {
-      const resp: any = await getAllorders();
+      const resp: any = await IdProducts(orderId);
 
-      const found = resp.data.find((o: any) => o.product?.id === orderId);
-
-      if (!found) return;
+      const found = resp.data;
+      console.log("ORDER:", found);
 
       this.orderDetails = {
-        id: found.product.id,
-        title: found.product.title,
-        description: found.product.description,
-        link: found.product.url,
-        imageUrl: found.product.image   // <-- aquí está la imagen real
+        id: found.id,
+        title: found.title,
+        description: found.description,
+        link: found.url,
+        imageUrl: found.image   // <-- aquí está la imagen real
       };
 
 

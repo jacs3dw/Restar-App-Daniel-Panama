@@ -103,6 +103,21 @@ export const getAllorders = async () => {
     return infoErrorApi(data, 'Error al obtener las órdenes');
 };
 
+export const IdProducts = async (id: string) => {
+    const response: ResponseApp = structuredClone(responseApi.responseApp);
+    const path = `/products/${id}`;
+
+    const respApi: ResponseApi = await fetchApiAuthenticated.get(path);
+    const { status, data } = respApi;
+
+    if (status) {
+        response.data = data.data;
+        return response;
+    }
+
+    return infoErrorApi(data, 'Error al obtener las órdenes');
+};
+
 export const updatePerfil = async (id: string, body: any) => {
     const response: ResponseApp = structuredClone(responseApi.responseApp);
     const path = `/users/update/${id}`;
