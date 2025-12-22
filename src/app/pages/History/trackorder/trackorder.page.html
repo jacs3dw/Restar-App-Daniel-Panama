@@ -113,8 +113,23 @@
       </ion-text>
     </div>
 
+    <div *ngIf="orderDetails?.state === 'Cancelled'"
+     style="
+       background: #FDECEA;
+       color: #B71C1C;
+       padding: 12px;
+       border-radius: 10px;
+       margin-bottom: 15px;
+       font-size: 14px;
+     ">
+  ⚠️ {{ orderDetails?.reason }}
+  </div>
+
+
     <!-- Timeline scrollable dentro del bottom sheet -->
-    <div style="margin-top: 20px; flex: 1; overflow-y: auto">
+    <div 
+    *ngIf="orderDetails?.state !== 'Cancelled' && trackingInfo"
+    style="margin-top: 20px; flex: 1; overflow-y: auto">
       <div class="list" style="display: flex; gap: 12px">
         <!-- Columna izquierda -->
         <div

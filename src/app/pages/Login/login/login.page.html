@@ -28,21 +28,29 @@
     </div>
   </div>
 
-  <div class="list" style="margin-top: 20px;">
-    <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Password</ion-text>
-    <div class="input" style="flex: 1; position: relative;">
-        <ion-input type="{{ showPassword ? 'text' : 'password' }}" [(ngModel)]="password" placeholder="" style="margin-left: 0px;"></ion-input>
-      <ion-icon name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end" (click)="togglePasswordVisibility()" 
-                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10;"></ion-icon>
-    </div>
+  <div class="list" style="margin-top: 20px;" *ngIf="codeSent">
+  <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">
+    Código
+  </ion-text>
+  <div class="input" style="flex: 1;">
+    <ion-input
+      [(ngModel)]="code"
+      placeholder="0000"
+      inputmode="numeric"
+      maxlength="4"
+      pattern="[0-9]*"
+    ></ion-input>
   </div>
+</div>
 
   <ion-button
-    expand="block"
-    style="margin: 20px 0;margin-top: 40px;--background: var(--ion-color-txt);--color: var(--ion-color-bg);"
-    (click)="onLoginClick()"
-  >
-    Log in
-  </ion-button>
+  expand="block"
+  style="margin: 20px 0;margin-top: 40px;
+         --background: var(--ion-color-txt);
+         --color: var(--ion-color-bg);"
+  (click)="codeSent ? onLoginWithCode() : onGenerateCode()"
+>
+  {{ codeSent ? 'Log in' : 'Enviar código' }}
+</ion-button>
 
 </ion-content>
