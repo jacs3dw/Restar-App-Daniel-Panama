@@ -143,7 +143,7 @@
           <ng-container *ngFor="let step of trackingInfo?.steps; let i = index">
             <ion-text class="b14">{{ step.date }}</ion-text>
             <div
-              [ngStyle]="{ 'margin-bottom.px': i < (trackingInfo?.steps?.length || 0) - 1 ? 15 : 0 }"
+              [ngStyle]="{ 'margin-bottom.px': i < trackingInfo.steps.length - 1 ? 15 : 0 }"
             >
               <ion-text class="r12" style="color: var(--ion-color-dis)">
                 {{ step.time }}
@@ -212,7 +212,7 @@
           <ng-container *ngFor="let step of trackingInfo?.steps; let i = index">
             <ion-text class="b16">{{ step.title }}</ion-text>
             <div
-              [ngStyle]="{ 'margin-bottom.px': i < (trackingInfo?.steps?.length || 0) - 1 ? 15 : 0 }"
+              [ngStyle]="{ 'margin-bottom.px': i < trackingInfo.steps.length - 1 ? 15 : 0 }"
             >
               <ion-text class="r12" style="color: var(--ion-color-dis)">
                 {{ step.address }}

@@ -132,6 +132,8 @@ export class PaymentPage implements OnInit {
   }
 
   goHome() {
-    this.router.navigate(["/tabs/home"]);
+    this.router.navigate(["/tabs/home"]).then(() => {
+    window.location.reload();
+  });
   }
 }

@@ -6,6 +6,7 @@ import { initUser } from 'src/app/app.module';
 import { UserLoaderService } from 'Api/services/auth/user-loader.service';
 
 
+
 interface ShipmentStop {
   icon: 'ellipse-outline' | 'location-outline';
   city: string;
@@ -63,6 +64,12 @@ export class HomePage implements OnInit {
     this.checkAppMode();
     this.loadShipments();
   }
+  ionViewDidEnter() {
+  console.log('🔥 ionViewDidEnter DISPARADO');
+  this.loadUserName();
+  this.checkAppMode();
+  this.loadShipments();
+}
 
   async checkAppMode() {
     const checkIsDarkMode = localStorage.getItem('darkModeActivated');
