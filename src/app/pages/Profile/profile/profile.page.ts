@@ -96,7 +96,9 @@ async showErrorModal(message: string) {
     // this.userSession.setUser(null);
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    this.router.navigate(['/login'], { replaceUrl: true });
+    this.router.navigate(['/login'], { replaceUrl: true }).then(() => {
+    window.location.reload();
+  });;
   }
   
   async confirmLogout() {
