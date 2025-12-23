@@ -90,6 +90,16 @@ export class HomePage implements OnInit {
     { label: 'DuckDuckGo', value: 'DuckDuckGo', focused: false },
   ];
 
+  toggleDarkMode() {
+    this.darkMode = !this.darkMode;
+    document.body.classList.toggle('dark', this.darkMode);
+    if (this.darkMode) {
+      localStorage.setItem('darkModeActivated', 'true');
+    } else {
+      localStorage.setItem('darkModeActivated', 'false');
+    }
+  }
+
   async loadShipments() {
   const resp = await getHomeProducts();
   console.log('Productos HOME (Initial):', resp);

@@ -50,7 +50,7 @@
     <div style="display: flex; align-items: center; gap: 6px;">
       <ion-text
         class="b16"
-        style="color: rgba(110, 110, 110, 0.60); display: block; margin-bottom: 4px;"
+        style="color: var(--ion-color-txt); display: block; margin-bottom: 4px;"
       >
         Title:
       </ion-text>
@@ -94,7 +94,7 @@
             'background-color': delivery.statusColor || 'var(--ion-color-primary)'
           }"
         >
-          <ion-text class="r10" style="color: #fff;">
+          <ion-text class="r10" style="color: var(--ion-color-txt);">
             {{ delivery.status }}
           </ion-text>
         </div>
@@ -113,7 +113,11 @@
           style="
             color: #488EEB;
             cursor: pointer;
-            word-break: break-all;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
           "
           (click)="openDeliveryUrl($event, delivery.url)"
         >
@@ -123,10 +127,21 @@
 
       <!-- Descripción -->
       <div style="margin-bottom: 12px;">
-        <ion-text class="r12" style="color: var(--ion-color-dis); line-height: 1.4;">
+        <ion-text
+          class="r12"
+          style="
+            color: var(--ion-color-txt);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          "
+        >
           {{ delivery.description }}
         </ion-text>
       </div>
+
     </div>
 
 

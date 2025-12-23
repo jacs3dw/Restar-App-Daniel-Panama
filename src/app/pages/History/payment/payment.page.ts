@@ -30,7 +30,7 @@ export class PaymentPage implements OnInit {
 
   @ViewChild("modal", { static: false }) modal!: IonModal;
 
-  darkMode = false;
+  darkMode = localStorage.getItem('darkModeActivated') === 'true';
 
   orderAmount: number = 0;
   deliveryFee: number = 5;

@@ -1,23 +1,42 @@
-<ion-header [translucent]="false" style="box-shadow: none;">
-  <ion-toolbar color="bg" style="padding: 0 15px; padding-top: 25px; --border-width: 0; margin-bottom: 4vh;">
-    <ion-buttons slot="start" style="justify-content: flex-start; margin-left: 0; padding-left: 0;">
+<ion-header
+  [translucent]="false"
+  style="
+    box-shadow: none;
+    background: transparent;
+    --background: transparent;
+    --border-width: 0;
+  "
+>
+  <ion-toolbar
+    color="bg"
+    style="
+      padding: 0 15px;
+      padding-top: 25px;
+      --border-width: 0;
+      margin-bottom: 0;
+    "
+  >
+    <ion-buttons slot="start">
       <ion-img 
-        [src]="darkMode?'../../../../assets/image/Logo_Restartify_Complet.svg':'../../../../assets/image/Logo_Restartify_Complet.svg'" 
-        style="width: 70vw; max-width: 70%; height: auto; margin-left: 0;"
+        [src]="darkMode
+          ? '../../../../assets/image/Logo_Restartify_Complet.svg'
+          : '../../../../assets/image/Logo_Restartify_Complet2.svg'"
+        style="width: 70vw; max-width: 70%; height: auto;"
       />
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content [fullscreen]="true" class="ion-padding">
   
   <ion-text class="title1">Welcome Back!</ion-text>
   <div style="margin-top: 5px;">
-    <ion-text class="r16" style="color: var(--ion-color-dis);">Let's Get Start</ion-text>
+    <ion-text class="r16" style="color: var(--ion-color-txt);">Let's Get Start</ion-text>
   </div>
 
   <div class="list" style="margin-top: 40px;">
-    <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">Email</ion-text>
+    <ion-text class="r16" style="color: var(--ion-color-txt);flex: 0.5;">Email</ion-text>
     <div class="input" style="flex: 1;">
       <ion-input
         [(ngModel)]="email"
@@ -29,7 +48,7 @@
   </div>
 
   <div class="list" style="margin-top: 20px;" *ngIf="codeSent">
-  <ion-text class="r16" style="color: var(--ion-color-dis);flex: 0.5;">
+  <ion-text class="r16" style="color: var(--ion-color-txt);flex: 0.5;">
     Code
   </ion-text>
   <div class="input" style="flex: 1;">

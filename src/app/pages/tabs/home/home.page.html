@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <ion-buttons slot="end" routerLink="/notify">
-      <ion-img [src]="darkMode?'../../../../assets/image/s2.png':'../../../../assets/image/s2.png'"
+    <ion-buttons slot="end" (click)="toggleDarkMode()">
+      <ion-img [src]="darkMode?'../../../../assets/image/contrast-svgrepo-com2.svg':'../../../../assets/image/contrast-svgrepo-com.svg'"
         style="height: 24px;width: 24px;" />
     </ion-buttons>
 
@@ -52,7 +52,14 @@
 </ion-header>
 
 
-<div class="scroll list" style="padding: 8px 15px; background-color: #141312;">
+<div
+  class="scroll list"
+  [ngStyle]="{
+    'padding': '8px 15px',
+    'background-color': darkMode ? '#141312' : '#fff'
+  }"
+>
+
   <div *ngFor="let item of items; let i = index;" (click)="onFocus(i)" [ngStyle]="{'background-color': item.focused ? 'var(--ion-color-txt)' : 'var(--ion-color-search)',
                 'border': item.focused ? 'none' : 'none',
                 'margin-right': item.focused ? '7px' : '7px',
@@ -156,17 +163,32 @@
           style="
             color: #488EEB;
             cursor: pointer;
-            word-break: break-all;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
           "
           (click)="openShipmentUrl($event, shipment.url)"
         >
           {{ shipment.url }}
         </ion-text>
       </div>
+
   
       <!-- Descripción -->
       <div style="margin-bottom: 12px;">
-        <ion-text class="r12" style="color: #ffffff; line-height: 1.4;">
+        <ion-text
+          class="r12"
+          style="
+            color: var(--ion-color-txt);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          "
+        >
           {{ shipment.description }}
         </ion-text>
       </div>
